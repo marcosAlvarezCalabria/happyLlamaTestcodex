@@ -34,6 +34,8 @@
 <script>
   const stage = document.querySelector<HTMLElement>('#hero-stage');
   const trigger = document.querySelector<HTMLButtonElement>('#hero-llama-trigger');
+  const llama = document.querySelector<HTMLImageElement>('.hero-llama');
+  const tapCue = document.querySelector<HTMLElement>('.hero-tap-cue');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let celebrationTimer = 0;
   let walkingTimer = 0;
@@ -41,6 +43,7 @@
   const resetWalk = () => {
     stage?.classList.remove('is-walking');
     trigger?.setAttribute('aria-label', 'Make the Happy Llama walk');
+    if (tapCue) tapCue.textContent = 'Tap the llama';
   };
 
   const celebrate = () => {
@@ -57,8 +60,14 @@
     if (!stage || reducedMotion.matches) return;
     window.clearTimeout(walkingTimer);
     stage.classList.remove('is-walking');
-    requestAnimationFrame(() => stage.classList.add('is-walking'));
+    void stage.offsetWidth;
+    stage.classList.add('is-walking');
     trigger.setAttribute('aria-label', 'Replay the Happy Llama walk');
-    walkingTimer = window.setTimeout(resetWalk, 2600);
+    if (tapCue) tapCue.textContent = 'Walking…';
+    walkingTimer = window.setTimeout(resetWalk, 3300);
+  });
+
+  llama?.addEventListener('animationend', (event) => {
+    if (event.animationName === 'llama-walk') resetWalk();
   });
 </script>

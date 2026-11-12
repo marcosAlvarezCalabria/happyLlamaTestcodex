@@ -20,7 +20,7 @@ Nunito Variable is self-hosted through the build. Headings use 800–900; body a
 
 ## Shape and material
 
-The reminder is one full-height photographic piece with the transparent llama layered into the chosen scene, direct message typography, saturated edge accents, and offset shadows. Creator controls remain sturdy and tactile. Radii are 14–28px; pills are used only for small status labels.
+The reminder is one full-height photographic piece with the selected scene rendered once across the card, the transparent llama layered into it, direct message typography, saturated edge accents, and offset shadows. Creator controls remain sturdy and tactile. Radii are 14–28px; pills are used only for small status labels.
 
 ## Composition
 
@@ -28,7 +28,7 @@ Mobile is the primary canvas. The viewer is a single full-height reminder with n
 
 ## Motion
 
-One authored moment owns the experience: the message types itself over the photograph, then tapping the llama repeats the typing while the cutout takes three playful steps and returns to rest. A brief fan of stars acknowledges the tap.
+One authored moment owns the experience: the message types itself over the photograph, then tapping the llama repeats the typing while the cutout travels visibly through three playful steps and returns to rest. A brief fan of stars acknowledges the tap.
 
 ## Accessibility and resilience
 

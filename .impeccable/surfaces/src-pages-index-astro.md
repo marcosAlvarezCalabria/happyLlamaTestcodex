@@ -19,7 +19,7 @@ Message, optional signature, and one of eight supplied scenes are the only creat
 
 ## Direction and memorable moment
 
-A vivid pocket-retablo reminder joins Peru and Galway. The selected photograph fills the frame, the personal message types directly over it, and the transparent llama reacts joyfully to a tap.
+A vivid pocket-retablo reminder joins Peru and Galway. The selected photograph is rendered once across the whole reminder, the personal message types directly over it, and the transparent llama visibly walks when tapped.
 
 ## Production assets
 
