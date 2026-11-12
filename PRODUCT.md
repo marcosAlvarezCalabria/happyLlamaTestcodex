@@ -30,7 +30,7 @@ The seller writes a short message, optional sign-off, and chooses one of eight s
 - Message and one of eight supplied Ireland/Peru scenes travel in the URL.
 - Mobile-first, narrow-screen and low-end Android support; 44px minimum touch targets and reduced-motion support.
 - Viewer language is English. Creator language is Spanish.
-- Supplied Galway/Peru photography, a Higgsfield walking motion generated from the approved Happy Llama hero, and a transparent cream llama cutout derived from the supplied photo are used as local assets.
+- Supplied Galway/Peru photography and a transparent cream llama cutout derived from the supplied photo are used as local assets. The chosen scene remains visible behind the llama and the tap motion runs in the browser.
 
 ## Brand Commitments
 

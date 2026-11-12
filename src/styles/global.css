@@ -728,35 +728,63 @@ h2 {
   overflow: hidden;
   border: 4px solid var(--ink);
   border-radius: 18px;
-  background: #f8e5df url('/assets/hero/happy-llama-tap-walk-poster.webp') center / cover no-repeat;
+  background: var(--scene-image) center / cover no-repeat;
   box-shadow: 0 7px 0 var(--pink), 0 18px 30px rgba(22, 10, 26, 0.26);
   isolation: isolate;
 }
 
-.hero-video-trigger {
+.hero-stage::before {
+  content: '';
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(22, 10, 26, 0.72) 0%, rgba(22, 10, 26, 0.23) 48%, rgba(22, 10, 26, 0.38) 100%),
+    linear-gradient(115deg, rgba(255, 0, 136, 0.12), transparent 44%);
+}
+
+.hero-llama-trigger {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   width: 100%;
   min-height: 100%;
   border: 0;
   border-radius: 14px;
-  background: #f8e5df;
+  background: transparent;
   padding: 0;
   cursor: pointer;
-  transform-origin: center;
 }
 
-.hero-video-trigger:focus-visible {
+.hero-llama-trigger:focus-visible {
   outline: 4px solid var(--pink-dark);
   outline-offset: -7px;
 }
 
-.hero-video {
+.hero-llama {
+  position: absolute;
+  left: 50%;
+  bottom: -3%;
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: min(62%, 310px);
+  height: auto;
+  filter: drop-shadow(0 16px 10px rgba(24, 11, 27, 0.36));
+  transform: translateX(-50%);
+  transform-origin: 50% 90%;
+  user-select: none;
+}
+
+.hero-llama-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 2.5%;
+  width: 46%;
+  height: 5%;
+  border-radius: 50%;
+  background: rgba(22, 10, 26, 0.34);
+  filter: blur(7px);
+  transform: translateX(-50%);
 }
 
 .hero-gift-copy {
@@ -766,30 +794,22 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 46%;
+  min-height: 43%;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 88% 22%, #ffcb68 0 10%, transparent 10.5%),
-    linear-gradient(140deg, #fff7f7, #ffe2e8);
-  color: var(--ink);
-  padding: clamp(18px, 5vw, 28px) clamp(18px, 5.5vw, 30px) 20px;
-  box-shadow: 0 7px 20px rgba(42, 34, 48, 0.15);
+  background: linear-gradient(180deg, rgba(22, 10, 26, 0.82) 0%, rgba(22, 10, 26, 0.58) 68%, transparent 100%);
+  color: #fff;
+  padding: clamp(18px, 5vw, 28px) clamp(18px, 5.5vw, 30px) 34px;
   text-align: left;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72);
 }
 
 .hero-gift-copy::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 -18px;
-  height: 36px;
-  background: inherit;
-  border-radius: 0 0 48% 18%;
-  clip-path: polygon(0 0, 100% 0, 100% 34%, 82% 74%, 61% 58%, 39% 92%, 18% 56%, 0 76%);
+  content: none;
 }
 
 .hero-gift-copy p {
   margin: 0 0 7px;
-  color: #7a355f;
+  color: var(--butter);
   font-size: 0.64rem;
   font-weight: 900;
   letter-spacing: 0.06em;
@@ -808,7 +828,7 @@ h2 {
 
 .hero-gift-copy > span {
   margin-top: 9px;
-  color: #6d3d5b;
+  color: #fff;
   font-size: 0.76rem;
   font-weight: 800;
 }
@@ -818,7 +838,7 @@ h2 {
   width: 0.09em;
   height: 0.9em;
   margin-left: 0.1em;
-  background: var(--pink);
+  background: var(--butter);
   opacity: 0;
   vertical-align: -0.05em;
 }
@@ -844,20 +864,6 @@ h2 {
   padding: 8px 12px;
   box-shadow: 0 4px 0 var(--pink-dark);
   font-size: 0.7rem;
-  font-weight: 900;
-}
-
-.video-needs-play .hero-video-trigger::after {
-  content: 'Tap to replay';
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  border-radius: 999px;
-  background: var(--pink);
-  color: #fff;
-  padding: 9px 14px;
-  box-shadow: 0 5px 0 var(--pink-dark);
-  font-size: 0.82rem;
   font-weight: 900;
 }
 
@@ -899,6 +905,30 @@ h2 {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2) rotate(0); }
   30% { opacity: 1; }
   100% { opacity: 0; transform: translate(calc(-50% + var(--spark-x)), calc(-50% + var(--spark-y))) scale(1.2) rotate(140deg); }
+}
+
+.is-walking .hero-llama {
+  will-change: transform, filter;
+  animation: llama-walk 2500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-walking .hero-llama-shadow {
+  animation: llama-shadow-walk 2500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes llama-walk {
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  15% { transform: translateX(-58%) translateY(-2.5%) rotate(-2.5deg); }
+  31% { transform: translateX(-43%) translateY(0) rotate(2.5deg); }
+  48% { transform: translateX(-56%) translateY(-3.5%) rotate(-2deg); }
+  65% { transform: translateX(-45%) translateY(0) rotate(2deg); }
+  82% { transform: translateX(-51%) translateY(-5%) rotate(-1deg) scale(1.035); }
+  100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+@keyframes llama-shadow-walk {
+  0%, 31%, 65%, 100% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+  15%, 48%, 82% { opacity: 0.68; transform: translateX(-50%) scaleX(0.86); }
 }
 
 .reminder-origin {
@@ -1056,7 +1086,7 @@ h2 {
     transition-duration: 0.01ms !important;
   }
 
-  .hero-video-trigger {
+  .hero-llama-trigger {
     animation: none;
   }
 

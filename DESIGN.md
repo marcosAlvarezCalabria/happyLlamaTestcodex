@@ -2,7 +2,7 @@
 
 ## Visual thesis
 
-The interface behaves like one personal, retablo-inspired reminder rather than a website. It opens directly into the supplied Galway–Peru photography, the short film, and the recipient's message.
+The interface behaves like one personal, retablo-inspired reminder rather than a website. It opens directly into the chosen Galway–Peru photograph, the recipient's message, and the llama standing freely inside that scene.
 
 ## Colour system
 
@@ -20,15 +20,15 @@ Nunito Variable is self-hosted through the build. Headings use 800–900; body a
 
 ## Shape and material
 
-The reminder is one full-height photographic piece with a framed moving memory, direct message typography, saturated edge accents, and offset shadows. Creator controls remain sturdy and tactile. Radii are 14–28px; pills are used only for small status labels.
+The reminder is one full-height photographic piece with the transparent llama layered into the chosen scene, direct message typography, saturated edge accents, and offset shadows. Creator controls remain sturdy and tactile. Radii are 14–28px; pills are used only for small status labels.
 
 ## Composition
 
-Mobile is the primary canvas. The viewer is a single full-height reminder with no catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message lives inside the upper part of the moving memory. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
+Mobile is the primary canvas. The viewer is a single full-height reminder with no catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message sits directly over the upper part of the selected photograph. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
 
 ## Motion
 
-One authored moment owns the experience: the message types itself into the hero, then tapping the llama repeats the typing while the llama takes three playful steps and returns to rest. A brief fan of stars acknowledges the tap; the video never autoplays.
+One authored moment owns the experience: the message types itself over the photograph, then tapping the llama repeats the typing while the cutout takes three playful steps and returns to rest. A brief fan of stars acknowledges the tap.
 
 ## Accessibility and resilience
 

@@ -1,27 +1,16 @@
-<section class="hero-stage scene-0" id="hero-stage" aria-labelledby="hero-title">
+<section class="hero-stage" id="hero-stage" aria-labelledby="hero-title">
   <h1 class="sr-only" id="hero-title">Your Happy Llama reminder</h1>
 
-  <button class="hero-video-trigger" id="hero-video-trigger" type="button" aria-label="Make the Happy Llama walk">
-    <video
-      class="hero-video"
-      id="hero-video"
-      muted
-      playsinline
-      preload="metadata"
-      poster="/assets/hero/happy-llama-tap-walk-poster.webp"
+  <button class="hero-llama-trigger" id="hero-llama-trigger" type="button" aria-label="Make the Happy Llama walk">
+    <span class="hero-llama-shadow" aria-hidden="true"></span>
+    <img
+      class="hero-llama"
+      src="/assets/llama/cream-cutout-tight.webp"
+      alt=""
+      width="479"
+      height="907"
       aria-hidden="true"
-    >
-      <source
-        src="/assets/hero/happy-llama-tap-walk.mp4"
-        type="video/mp4"
-      />
-      <img
-        src="/assets/hero/happy-llama-tap-walk-poster.webp"
-        alt="A Happy Llama ready to walk"
-        width="834"
-        height="1112"
-      />
-    </video>
+    />
     <span class="sr-only">Play the Happy Llama walking animation</span>
   </button>
 
@@ -44,10 +33,10 @@
 
 <script>
   const stage = document.querySelector<HTMLElement>('#hero-stage');
-  const trigger = document.querySelector<HTMLButtonElement>('#hero-video-trigger');
-  const video = document.querySelector<HTMLVideoElement>('#hero-video');
+  const trigger = document.querySelector<HTMLButtonElement>('#hero-llama-trigger');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let celebrationTimer = 0;
+  let walkingTimer = 0;
 
   const resetWalk = () => {
     stage?.classList.remove('is-walking');
@@ -57,7 +46,7 @@
   const celebrate = () => {
     if (!stage || reducedMotion.matches) return;
     window.clearTimeout(celebrationTimer);
-    stage.classList.remove('is-celebrating', 'video-needs-play');
+    stage.classList.remove('is-celebrating');
     requestAnimationFrame(() => stage.classList.add('is-celebrating'));
     celebrationTimer = window.setTimeout(() => stage.classList.remove('is-celebrating'), 900);
   };
@@ -65,22 +54,11 @@
   trigger?.addEventListener('click', () => {
     celebrate();
     window.dispatchEvent(new CustomEvent('happy-llama:retype'));
-    if (!video) return;
-    video.currentTime = 0;
-    stage?.classList.add('is-walking');
+    if (!stage || reducedMotion.matches) return;
+    window.clearTimeout(walkingTimer);
+    stage.classList.remove('is-walking');
+    requestAnimationFrame(() => stage.classList.add('is-walking'));
     trigger.setAttribute('aria-label', 'Replay the Happy Llama walk');
-    void video.play().catch(() => {
-      resetWalk();
-      stage?.classList.add('video-needs-play');
-    });
+    walkingTimer = window.setTimeout(resetWalk, 2600);
   });
-
-  video?.addEventListener('ended', () => {
-    video.currentTime = 0;
-    resetWalk();
-  });
-
-  video?.addEventListener('error', resetWalk);
-
-  video?.pause();
 </script>

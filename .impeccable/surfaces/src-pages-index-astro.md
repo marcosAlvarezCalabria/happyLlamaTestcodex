@@ -11,7 +11,7 @@ One root route with two client-selected modes. Creator is an Operate surface for
 
 ## Audience, job, and action
 
-The Happy Llama owner must create an NFC-ready reminder URL quickly on a phone, including while the on-screen keyboard is open. The recipient should understand the personal message immediately and be able to replay the film without navigating a website.
+The Happy Llama owner must create an NFC-ready reminder URL quickly on a phone, including while the on-screen keyboard is open. The recipient should understand the personal message immediately and be able to replay the llama's motion without navigating a website.
 
 ## Content and constraints
 
@@ -19,8 +19,8 @@ Message, optional signature, and one of eight supplied scenes are the only creat
 
 ## Direction and memorable moment
 
-A vivid pocket-retablo reminder joins Peru and Galway. The personal message types itself inside the film's upper panel, then replays alongside the llama's joyful tap reaction.
+A vivid pocket-retablo reminder joins Peru and Galway. The selected photograph fills the frame, the personal message types directly over it, and the transparent llama reacts joyfully to a tap.
 
 ## Production assets
 
-The supplied scene photographs, transparent llama cutout, and Higgsfield tap-triggered walking film are in use.
+The supplied scene photographs and tightly cropped transparent llama cutout are in use. Tap-triggered walking motion is rendered in the browser.
