@@ -33,7 +33,8 @@ The `dist/` folder can be dragged into Netlify Drop. There are no server functio
 
 ## Artwork
 
-- Interactive llama: `public/assets/llama/cream-cutout-tight.webp` is a tightly cropped transparent extraction derived from the supplied product image. It stands over the chosen scene and walks briefly when tapped.
+- Viewer motion: `public/assets/hero/happy-llama-tap-walk.mp4` is the full-screen Higgsfield scene. It remains on its poster until the recipient taps, then plays once and returns to the opening frame.
+- Creator preview: `public/assets/llama/cream-cutout-tight.webp` is a tightly cropped transparent extraction derived from the supplied product image.
 - Scenes: the eight supplied photographs live in `public/assets/scenes/` as WebP files.
 - Logo: `public/assets/brand/happy-llama-logo.png` is the supplied company logo.
 

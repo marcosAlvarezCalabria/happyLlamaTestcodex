@@ -19,8 +19,8 @@ Message, optional signature, and one of eight supplied scenes are the only creat
 
 ## Direction and memorable moment
 
-A vivid pocket-retablo reminder joins Peru and Galway. The selected photograph is rendered once across the whole reminder, the personal message types directly over it, and the transparent llama visibly walks when tapped.
+A vivid pocket-retablo reminder joins Peru and Galway. The Higgsfield motion fills the whole screen without a card, the personal message types onto a sign above the llama, and the walk plays when tapped.
 
 ## Production assets
 
-The supplied scene photographs and tightly cropped transparent llama cutout are in use. Tap-triggered walking motion is rendered in the browser.
+The supplied scene photographs and transparent llama cutout remain in the creator preview. The viewer uses the Higgsfield tap-triggered walking film as its single edge-to-edge scene.
