@@ -2,17 +2,18 @@
   <h1 class="sr-only" id="hero-title">Your Happy Llama reminder</h1>
 
   <button class="hero-video-trigger" id="hero-video-trigger" type="button" aria-label="Make the Happy Llama walk">
-    <video
-      class="hero-video"
-      id="hero-video"
-      muted
-      playsinline
-      preload="auto"
-      poster="/assets/hero/happy-llama-tap-walk-poster.webp"
+    <img
+      class="hero-llama-motion"
+      id="hero-llama-motion"
+      src="/assets/hero/happy-llama-tap-walk-rest.webp"
+      data-rest-src="/assets/hero/happy-llama-tap-walk-rest.webp"
+      data-motion-src="/assets/hero/happy-llama-tap-walk-transparent.webp"
+      width="540"
+      height="772"
+      alt=""
+      draggable="false"
       aria-hidden="true"
-    >
-      <source src="/assets/hero/happy-llama-tap-walk.mp4" type="video/mp4" />
-    </video>
+    />
     <span class="sr-only">Play the Happy Llama walking animation</span>
   </button>
 
@@ -36,16 +37,22 @@
 <script>
   const stage = document.querySelector<HTMLElement>('#hero-stage');
   const trigger = document.querySelector<HTMLButtonElement>('#hero-video-trigger');
-  const video = document.querySelector<HTMLVideoElement>('#hero-video');
+  const llama = document.querySelector<HTMLImageElement>('#hero-llama-motion');
   const tapCue = document.querySelector<HTMLElement>('.hero-tap-cue');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let celebrationTimer = 0;
   let walkingTimer = 0;
 
+  const restSource = llama?.dataset.restSrc || '';
+  const motionSource = llama?.dataset.motionSrc || '';
+  if (motionSource) {
+    const motionPreload = new Image();
+    motionPreload.src = motionSource;
+  }
+
   const resetWalk = () => {
     stage?.classList.remove('is-walking');
-    video?.pause();
-    if (video) video.currentTime = 0;
+    if (llama && restSource) llama.src = restSource;
     trigger?.setAttribute('aria-label', 'Make the Happy Llama walk');
     if (tapCue) tapCue.textContent = 'Tap the llama';
   };
@@ -61,21 +68,20 @@
   trigger?.addEventListener('click', () => {
     celebrate();
     window.dispatchEvent(new CustomEvent('happy-llama:retype'));
-    if (!stage || !video || reducedMotion.matches) return;
+    if (!stage || !llama || !motionSource || reducedMotion.matches) return;
     window.clearTimeout(walkingTimer);
-    video.pause();
-    video.currentTime = 0;
+    if (restSource) llama.src = restSource;
     stage.classList.add('is-walking');
     trigger.setAttribute('aria-label', 'Replay the Happy Llama walk');
     if (tapCue) tapCue.textContent = 'Walking…';
-    void video.play().catch(() => {
-      resetWalk();
-      if (tapCue) tapCue.textContent = 'Tap to retry';
+    requestAnimationFrame(() => {
+      llama.src = motionSource;
     });
-    walkingTimer = window.setTimeout(resetWalk, 4600);
+    walkingTimer = window.setTimeout(resetWalk, 4250);
   });
 
-  video?.addEventListener('ended', resetWalk);
-  video?.addEventListener('error', resetWalk);
-  video?.pause();
+  llama?.addEventListener('error', () => {
+    resetWalk();
+    if (tapCue) tapCue.textContent = 'Tap to retry';
+  });
 </script>
