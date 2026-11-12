@@ -5,9 +5,9 @@
     <img
       class="hero-llama-media hero-llama-rest"
       id="hero-llama-rest"
-      src="/assets/hero/happy-llama-walk-rest-v2.webp"
-      width="540"
-      height="960"
+      src="/assets/hero/happy-llama-walk-rest-v4.webp"
+      width="360"
+      height="640"
       alt=""
       draggable="false"
       aria-hidden="true"
@@ -15,8 +15,8 @@
     <img
       class="hero-llama-media hero-llama-animated"
       id="hero-llama-animated"
-      src="/assets/hero/happy-llama-walk-rest-v2.webp"
-      data-motion-src="/assets/hero/happy-llama-walk-v3.webp"
+      src="/assets/hero/happy-llama-walk-rest-v4.webp"
+      data-motion-src="/assets/hero/happy-llama-walk-v4.webp"
       width="360"
       height="640"
       alt=""
@@ -61,7 +61,7 @@
   const resetWalk = () => {
     window.clearTimeout(walkingTimer);
     stage?.classList.remove('is-walking');
-    if (llamaAnimated) llamaAnimated.src = '/assets/hero/happy-llama-walk-rest-v2.webp';
+    if (llamaAnimated) llamaAnimated.src = '/assets/hero/happy-llama-walk-rest-v4.webp';
     trigger?.setAttribute('aria-label', 'Make the Happy Llama walk');
     if (tapCue) tapCue.textContent = 'Tap the llama';
   };

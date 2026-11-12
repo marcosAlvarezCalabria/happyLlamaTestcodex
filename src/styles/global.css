@@ -802,7 +802,6 @@ h2 {
   max-height: 64dvh;
   object-fit: contain;
   object-position: center bottom;
-  filter: drop-shadow(0 18px 18px rgba(22, 10, 26, 0.3));
   transform: translateX(-50%);
   transform-origin: center bottom;
   user-select: none;
