@@ -833,6 +833,7 @@ h2 {
 }
 
 .hero-gift-copy {
+  --gift-copy-size: clamp(1.45rem, 6.6vw, 2.35rem);
   position: absolute;
   z-index: 4;
   inset: clamp(92px, 12dvh, 132px) 20px auto;
@@ -864,7 +865,7 @@ h2 {
 .hero-gift-copy blockquote {
   min-height: 1.08em;
   margin: 0;
-  font-size: clamp(1.45rem, 6.6vw, 2.35rem);
+  font-size: var(--gift-copy-size);
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.03;
@@ -872,19 +873,23 @@ h2 {
   text-wrap: balance;
 }
 
-.hero-gift-copy[data-message-length='short'] blockquote {
-  font-size: clamp(2.9rem, 13.2vw, 4.7rem);
+.hero-gift-copy[data-message-length='short'] {
+  --gift-copy-size: clamp(2.9rem, 13.2vw, 4.7rem);
 }
 
-.hero-gift-copy[data-message-length='medium'] blockquote {
-  font-size: clamp(2.05rem, 8.4vw, 3.15rem);
+.hero-gift-copy[data-message-length='medium'] {
+  --gift-copy-size: clamp(2.05rem, 8.4vw, 3.15rem);
 }
 
 .hero-gift-copy > span {
   margin-top: 10px;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-size: var(--gift-copy-size);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.03;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .hero-gift-copy .type-caret {
@@ -1125,6 +1130,7 @@ h2 {
 
 @media (max-height: 760px) {
   .hero-gift-copy {
+    --gift-copy-size: clamp(1.15rem, 5.2vw, 1.45rem);
     inset-block-start: clamp(76px, 12dvh, 88px);
     width: min(calc(100% - 32px), 460px);
   }
@@ -1134,21 +1140,16 @@ h2 {
     font-size: 0.58rem;
   }
 
-  .hero-gift-copy blockquote {
-    font-size: clamp(1.15rem, 5.2vw, 1.45rem);
+  .hero-gift-copy[data-message-length='short'] {
+    --gift-copy-size: clamp(2.3rem, 10.4vw, 2.9rem);
   }
 
-  .hero-gift-copy[data-message-length='short'] blockquote {
-    font-size: clamp(2.3rem, 10.4vw, 2.9rem);
-  }
-
-  .hero-gift-copy[data-message-length='medium'] blockquote {
-    font-size: clamp(1.65rem, 7.2vw, 2rem);
+  .hero-gift-copy[data-message-length='medium'] {
+    --gift-copy-size: clamp(1.65rem, 7.2vw, 2rem);
   }
 
   .hero-gift-copy > span {
     margin-top: 7px;
-    font-size: 0.72rem;
   }
 
   .hero-llama-media {

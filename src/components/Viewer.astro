@@ -36,7 +36,13 @@ import Hero from './Hero.astro';
   if (giftMessageTyped) giftMessageTyped.textContent = message;
   if (giftFrom) giftFrom.textContent = from;
   if (giftCopy) {
-    giftCopy.dataset.messageLength = message.length <= 30 ? 'short' : message.length <= 65 ? 'medium' : 'long';
+    const combinedLength = message.length + from.length;
+    giftCopy.dataset.messageLength =
+      message.length <= 30 && from.length <= 30 && combinedLength <= 48
+        ? 'short'
+        : combinedLength <= 72
+          ? 'medium'
+          : 'long';
   }
   if (reminderCard) reminderCard.className = `reminder-card scene-${scene}`;
   document.documentElement.lang = 'en';
