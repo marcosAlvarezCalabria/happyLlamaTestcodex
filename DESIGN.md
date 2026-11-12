@@ -16,7 +16,7 @@ Use the full palette in broad scene fields and small folk details. Keep form con
 
 ## Type
 
-Nunito Variable is self-hosted for interface headings, labels, body, and controls. Caveat Variable is also self-hosted and reserved for the personal message and signature, giving them a handwritten keepsake voice at one shared display scale. Short pairs use approximately twice the standard size, while medium and long pairs step down automatically to preserve the clear zone above the llama.
+Nunito Variable is self-hosted for interface headings, labels, body, and controls. Caveat Variable is also self-hosted and reserved for the personal message and signature, giving them a handwritten keepsake voice at one shared display scale. Short pairs use an oversized two-times display scale, while medium and long pairs step down automatically to preserve the clear zone above the llama.
 
 ## Shape and material
 
@@ -24,7 +24,7 @@ The reminder is one full-height Higgsfield motion scene with no inner card or se
 
 ## Composition
 
-Mobile is the primary canvas. The viewer is one edge-to-edge motion background with no framed card, catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message uses a reserved upper text zone that remains clear of the visible llama, including with long copy and short screens. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
+Mobile is the primary canvas. The viewer is one edge-to-edge motion background with no framed card, catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message uses a reserved upper text zone that remains clear of the visible llama, including with long copy and short screens. For short message-and-signature pairs, the type becomes the dominant keepsake gesture and the llama scales down to yield the necessary space. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
 
 ## Motion
 

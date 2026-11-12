@@ -26,24 +26,26 @@ import Hero from './Hero.astro';
   const giftMessageTyped = document.querySelector<HTMLElement>('#gift-message-typed');
   const giftFrom = document.querySelector<HTMLElement>('#gift-from');
   const giftCopy = document.querySelector<HTMLElement>('.hero-gift-copy');
+  const heroStage = document.querySelector<HTMLElement>('#hero-stage');
   const reminderCard = document.querySelector<HTMLElement>('#reminder-card');
   const rawScene = Number.parseInt(params.get('b') || '0', 10);
   const scene = Number.isFinite(rawScene) ? Math.min(7, Math.max(0, rawScene)) : 0;
   const message = (params.get('t') || 'A little Galway hello, especially for you.').slice(0, 120);
   const from = (params.get('f') || 'With love, Happy Llama').slice(0, 60);
 
+  const combinedLength = message.length + from.length;
+  const messageLength =
+    message.length <= 30 && from.length <= 30 && combinedLength <= 48
+      ? 'short'
+      : combinedLength <= 72
+        ? 'medium'
+        : 'long';
+
   if (giftMessage) giftMessage.textContent = message;
   if (giftMessageTyped) giftMessageTyped.textContent = message;
   if (giftFrom) giftFrom.textContent = from;
-  if (giftCopy) {
-    const combinedLength = message.length + from.length;
-    giftCopy.dataset.messageLength =
-      message.length <= 30 && from.length <= 30 && combinedLength <= 48
-        ? 'short'
-        : combinedLength <= 72
-          ? 'medium'
-          : 'long';
-  }
+  if (giftCopy) giftCopy.dataset.messageLength = messageLength;
+  if (heroStage) heroStage.dataset.messageLength = messageLength;
   if (reminderCard) reminderCard.className = `reminder-card scene-${scene}`;
   document.documentElement.lang = 'en';
 
