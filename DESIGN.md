@@ -16,7 +16,7 @@ Use the full palette in broad scene fields and small folk details. Keep form con
 
 ## Type
 
-Nunito Variable is self-hosted through the build. Headings use 800–900; body and controls use 600–750. Copy remains friendly, direct, and short. The personal message and its signature share one display scale: short pairs use approximately twice the standard size, while medium and long pairs step down automatically to preserve the clear zone above the llama.
+Nunito Variable is self-hosted for interface headings, labels, body, and controls. Caveat Variable is also self-hosted and reserved for the personal message and signature, giving them a handwritten keepsake voice at one shared display scale. Short pairs use approximately twice the standard size, while medium and long pairs step down automatically to preserve the clear zone above the llama.
 
 ## Shape and material
 

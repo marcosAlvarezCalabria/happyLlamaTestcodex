@@ -833,10 +833,10 @@ h2 {
 }
 
 .hero-gift-copy {
-  --gift-copy-size: clamp(1.45rem, 6.6vw, 2.35rem);
+  --gift-copy-size: clamp(1.55rem, 7vw, 2.5rem);
   position: absolute;
   z-index: 4;
-  inset: clamp(92px, 12dvh, 132px) 20px auto;
+  inset: clamp(112px, 14dvh, 154px) 20px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -865,29 +865,31 @@ h2 {
 .hero-gift-copy blockquote {
   min-height: 1.08em;
   margin: 0;
+  font-family: 'Caveat Variable', 'Segoe Print', 'Bradley Hand', cursive;
   font-size: var(--gift-copy-size);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.03;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.94;
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
 
 .hero-gift-copy[data-message-length='short'] {
-  --gift-copy-size: clamp(2.9rem, 13.2vw, 4.7rem);
+  --gift-copy-size: clamp(3.15rem, 14.5vw, 5.1rem);
 }
 
 .hero-gift-copy[data-message-length='medium'] {
-  --gift-copy-size: clamp(2.05rem, 8.4vw, 3.15rem);
+  --gift-copy-size: clamp(2.2rem, 9vw, 3.35rem);
 }
 
 .hero-gift-copy > span {
   margin-top: 10px;
   color: rgba(255, 255, 255, 0.92);
+  font-family: 'Caveat Variable', 'Segoe Print', 'Bradley Hand', cursive;
   font-size: var(--gift-copy-size);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.03;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.94;
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
@@ -1130,8 +1132,8 @@ h2 {
 
 @media (max-height: 760px) {
   .hero-gift-copy {
-    --gift-copy-size: clamp(1.15rem, 5.2vw, 1.45rem);
-    inset-block-start: clamp(76px, 12dvh, 88px);
+    --gift-copy-size: clamp(1.2rem, 5.6vw, 1.55rem);
+    inset-block-start: clamp(88px, 14dvh, 104px);
     width: min(calc(100% - 32px), 460px);
   }
 
@@ -1141,11 +1143,11 @@ h2 {
   }
 
   .hero-gift-copy[data-message-length='short'] {
-    --gift-copy-size: clamp(2.3rem, 10.4vw, 2.9rem);
+    --gift-copy-size: clamp(2.5rem, 11.2vw, 3.1rem);
   }
 
   .hero-gift-copy[data-message-length='medium'] {
-    --gift-copy-size: clamp(1.65rem, 7.2vw, 2rem);
+    --gift-copy-size: clamp(1.75rem, 7.6vw, 2.15rem);
   }
 
   .hero-gift-copy > span {
