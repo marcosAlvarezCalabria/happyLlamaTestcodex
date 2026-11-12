@@ -215,6 +215,99 @@ h2 {
   max-width: 620px;
 }
 
+.mobile-live-preview {
+  position: sticky;
+  z-index: 30;
+  top: max(0px, env(safe-area-inset-top));
+  align-self: start;
+  margin: 0 -4px 9px;
+  padding: 7px 4px 12px;
+  background: rgba(255, 253, 247, 0.97);
+}
+
+.mobile-preview-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-bottom: 7px;
+  color: #5d4c61;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.mobile-preview-label span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 0 4px rgba(255, 0, 136, 0.13);
+}
+
+.mobile-preview-card {
+  position: relative;
+  min-height: 168px;
+  overflow: hidden;
+  border: 4px solid var(--ink);
+  border-radius: 16px;
+  background: var(--scene-image) center / cover no-repeat;
+  box-shadow: 0 6px 0 var(--pink);
+  isolation: isolate;
+}
+
+.mobile-preview-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg, rgba(31, 18, 35, 0.88) 2%, rgba(31, 18, 35, 0.56) 54%, transparent 82%);
+}
+
+.mobile-preview-llama {
+  position: absolute;
+  right: 2%;
+  bottom: -5%;
+  width: 46%;
+  height: 98%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 8px 10px rgba(37, 20, 40, 0.26));
+}
+
+.mobile-preview-message {
+  position: absolute;
+  z-index: 2;
+  inset: auto auto 13px 14px;
+  width: 59%;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.55);
+}
+
+.mobile-preview-message p {
+  margin: 0 0 5px;
+  color: var(--butter);
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mobile-preview-message blockquote {
+  margin: 0;
+  font-size: clamp(1.05rem, 5.4vw, 1.42rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  overflow-wrap: anywhere;
+}
+
+.mobile-preview-message span {
+  display: block;
+  margin-top: 7px;
+  color: #fff6cd;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
 .keepsake-form label,
 .scene-fieldset legend {
   color: var(--ink);
@@ -439,6 +532,7 @@ h2 {
 }
 
 .preview-zone {
+  display: none;
   width: min(100%, 440px);
   margin-inline: auto;
   align-self: center;
@@ -486,19 +580,15 @@ h2 {
   top: 4%;
   left: 50%;
   width: 70%;
-  aspect-ratio: 1;
-  overflow: hidden;
-  border: 3px solid rgba(255, 255, 255, 0.82);
-  border-radius: 48% 48% 24px 24px;
-  background: var(--paper);
+  height: 66%;
   transform: translateX(-50%);
-  box-shadow: 0 12px 24px rgba(37, 20, 40, 0.28);
+  filter: drop-shadow(0 12px 16px rgba(37, 20, 40, 0.3));
 }
 
 .preview-llama img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .preview-message {
@@ -848,7 +938,7 @@ h2 {
 }
 
 .dressup-base {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .accessory-layer {
@@ -969,6 +1059,14 @@ h2 {
 .scene-7 { --scene-image: url('/assets/scenes/rainbow.webp'); }
 
 @media (min-width: 780px) {
+  .mobile-live-preview {
+    display: none;
+  }
+
+  .preview-zone {
+    display: block;
+  }
+
   .creator-grid {
     grid-template-columns: minmax(0, 1.2fr) minmax(330px, 0.8fr);
     align-items: center;

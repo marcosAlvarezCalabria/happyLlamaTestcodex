@@ -2,7 +2,7 @@
 
 ## Visual thesis
 
-The interface behaves like a small retablo-inspired keepsake that opens into supplied Galway–Peru photography. It is playful and handcrafted while keeping the product images recognisable and unretouched.
+The interface behaves like a small retablo-inspired keepsake that opens into supplied Galway–Peru photography. It is playful and handcrafted while keeping the supplied product identity recognisable in clean transparent cutouts.
 
 ## Colour system
 
@@ -24,7 +24,7 @@ The keepsake has a stepped, scalloped silhouette, saturated edge bands, offset s
 
 ## Composition
 
-Mobile is the primary canvas. The viewer opens with the interactive llama scene at near-viewport scale, followed by the message and dress-up rail. The creator uses a two-part workstation: form and continuously visible preview, becoming a balanced split layout on wider screens.
+Mobile is the primary canvas. The viewer opens with the interactive llama scene at near-viewport scale, followed by the message and dress-up rail. The creator keeps a compact live preview pinned inside the mobile form and becomes a balanced form/preview split on wider screens.
 
 ## Motion
 

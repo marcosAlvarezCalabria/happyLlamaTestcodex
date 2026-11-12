@@ -31,6 +31,26 @@ const scenes = [
       </p>
 
       <form class="keepsake-form" id="keepsake-form" novalidate>
+        <div class="mobile-live-preview" aria-label="Vista previa que se actualiza mientras editas">
+          <div class="mobile-preview-label"><span></span> Vista previa mientras escribes</div>
+          <div class="mobile-preview-card scene-0" data-live-preview>
+            <div class="mobile-preview-scene" aria-hidden="true"></div>
+            <img
+              class="mobile-preview-llama"
+              src="/assets/llama/cream-cutout.webp"
+              alt=""
+              width="1254"
+              height="1254"
+              aria-hidden="true"
+            />
+            <div class="mobile-preview-message">
+              <p>A keepsake from Galway</p>
+              <blockquote data-preview-message>I was in Galway and thought of you 🦙</blockquote>
+              <span data-preview-from>With love, Happy Llama</span>
+            </div>
+          </div>
+        </div>
+
         <label for="message">
           Mensaje
           <span class="character-count"><span id="message-count">0</span>/120</span>
@@ -81,15 +101,15 @@ const scenes = [
 
     <aside class="preview-zone" aria-label="Vista previa del recuerdo">
       <div class="preview-label"><span></span> Vista previa en vivo</div>
-      <div class="keepsake-card scene-0" id="live-preview">
+      <div class="keepsake-card scene-0" data-live-preview>
         <div class="preview-scene" aria-hidden="true"></div>
         <div class="preview-llama" aria-hidden="true">
-          <img src="/assets/llama/cream.webp" alt="" />
+          <img src="/assets/llama/cream-cutout.webp" alt="" width="1254" height="1254" />
         </div>
         <div class="preview-message">
           <p>A keepsake from Galway</p>
-          <blockquote id="preview-message">I was in Galway and thought of you 🦙</blockquote>
-          <span id="preview-from">With love, Happy Llama</span>
+          <blockquote data-preview-message>I was in Galway and thought of you 🦙</blockquote>
+          <span data-preview-from>With love, Happy Llama</span>
         </div>
         <div class="card-stitch" aria-hidden="true"></div>
       </div>
@@ -108,10 +128,10 @@ const scenes = [
   const message = document.querySelector<HTMLTextAreaElement>('#message');
   const from = document.querySelector<HTMLInputElement>('#from');
   const copyButton = document.querySelector<HTMLButtonElement>('#copy-link');
-  const previewMessage = document.querySelector<HTMLElement>('#preview-message');
-  const previewFrom = document.querySelector<HTMLElement>('#preview-from');
+  const previewMessages = Array.from(document.querySelectorAll<HTMLElement>('[data-preview-message]'));
+  const previewSignatures = Array.from(document.querySelectorAll<HTMLElement>('[data-preview-from]'));
   const count = document.querySelector<HTMLElement>('#message-count');
-  const livePreview = document.querySelector<HTMLElement>('#live-preview');
+  const livePreviews = Array.from(document.querySelectorAll<HTMLElement>('[data-live-preview]'));
   const linkResult = document.querySelector<HTMLElement>('#link-result');
   const generatedLink = document.querySelector<HTMLAnchorElement>('#generated-link');
   const copyStatus = document.querySelector<HTMLElement>('#copy-status');
@@ -126,15 +146,16 @@ const scenes = [
   const updatePreview = () => {
     const text = message?.value.trim() || sampleMessage;
     const signature = from?.value.trim() || sampleFrom;
-    if (previewMessage) previewMessage.textContent = text;
-    if (previewFrom) previewFrom.textContent = signature;
+    previewMessages.forEach((preview) => preview.textContent = text);
+    previewSignatures.forEach((preview) => preview.textContent = signature);
     if (count) count.textContent = String(message?.value.length ?? 0);
     if (copyButton) copyButton.disabled = !(message?.value.trim());
     if (message?.value.trim() && error) error.hidden = true;
 
-    if (livePreview) {
-      livePreview.className = `keepsake-card scene-${selectedScene()}`;
-    }
+    livePreviews.forEach((preview) => {
+      const previewClass = preview.classList.contains('mobile-preview-card') ? 'mobile-preview-card' : 'keepsake-card';
+      preview.className = `${previewClass} scene-${selectedScene()}`;
+    });
   };
 
   const makeId = () => {

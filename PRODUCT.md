@@ -30,7 +30,7 @@ The seller writes a short message, optional sign-off, and chooses one of eight s
 - Message and one of eight supplied Ireland/Peru scenes travel in the URL. Llama colour and outfit state persist in `localStorage` using the card ID.
 - Mobile-first, narrow-screen and low-end Android support; 44px minimum touch targets and reduced-motion support.
 - Viewer language is English. Creator language is Spanish.
-- Supplied Galway/Peru photography and cream/brown llama product photos are used as local assets; accessory layers remain independently replaceable.
+- Supplied Galway/Peru photography and transparent cream/brown llama cutouts derived from the supplied photos are used as local assets; accessory layers remain independently replaceable.
 
 ## Brand Commitments
 

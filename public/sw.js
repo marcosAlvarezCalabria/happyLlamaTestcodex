@@ -1,4 +1,4 @@
-const CACHE = 'happy-llama-keepsake-v3';
+const CACHE = 'happy-llama-keepsake-v4';
 const CORE = [
   '/',
   '/assets/brand/happy-llama-logo.png',
@@ -6,8 +6,8 @@ const CORE = [
   '/assets/hero/llama.svg',
   '/assets/hero/happy-llama-hero-mobile-poster.webp',
   '/assets/hero/happy-llama-hero-desktop-poster.webp',
-  '/assets/llama/cream.webp',
-  '/assets/llama/brown.webp',
+  '/assets/llama/cream-cutout.webp',
+  '/assets/llama/brown-cutout.webp',
   '/assets/scenes/galway.webp',
   '/assets/scenes/cusco.webp',
   '/assets/scenes/machupicchu.webp',

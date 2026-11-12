@@ -9,8 +9,8 @@ const accessories = [
 ];
 
 const llamas = [
-  { id: 'cream', label: 'Cream llama', src: '/assets/llama/cream.webp' },
-  { id: 'brown', label: 'Brown llama', src: '/assets/llama/brown.webp' },
+  { id: 'cream', label: 'Cream llama', src: '/assets/llama/cream-cutout.webp' },
+  { id: 'brown', label: 'Brown llama', src: '/assets/llama/brown-cutout.webp' },
 ];
 ---
 
@@ -43,7 +43,7 @@ const llamas = [
     <img
       class="dressup-base"
       id="dressup-base"
-      src="/assets/llama/cream.webp"
+      src="/assets/llama/cream-cutout.webp"
       alt="Cream Happy Llama"
       width="900"
       height="900"
@@ -105,7 +105,7 @@ const llamas = [
 
   const renderOutfit = (changed?: string, llamaChanged = false) => {
     if (dressupBase) {
-      dressupBase.src = `/assets/llama/${selectedLlama}.webp`;
+      dressupBase.src = `/assets/llama/${selectedLlama}-cutout.webp`;
       dressupBase.alt = `${selectedLlama === 'brown' ? 'Brown' : 'Cream'} Happy Llama`;
     }
     llamaButtons.forEach((button) => {
