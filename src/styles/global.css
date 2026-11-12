@@ -1115,7 +1115,7 @@ h2 {
 
 }
 
-@media (max-height: 700px) {
+@media (max-height: 760px) {
   .hero-gift-copy {
     inset-block-start: clamp(76px, 12dvh, 88px);
     width: min(calc(100% - 32px), 460px);
