@@ -813,7 +813,7 @@ h2 {
   transition: opacity 120ms ease;
 }
 
-.hero-llama-video {
+.hero-llama-animated {
   opacity: 0;
   pointer-events: none;
   transition: opacity 120ms ease;
@@ -823,7 +823,7 @@ h2 {
   opacity: 0;
 }
 
-.is-walking .hero-llama-video {
+.is-walking .hero-llama-animated {
   opacity: 1;
 }
 
@@ -1145,7 +1145,7 @@ h2 {
     animation: none;
   }
 
-  .hero-llama-video {
+  .hero-llama-animated {
     display: none;
   }
 

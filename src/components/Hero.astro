@@ -12,17 +12,17 @@
       draggable="false"
       aria-hidden="true"
     />
-    <video
-      class="hero-llama-media hero-llama-video"
-      id="hero-llama-video"
-      width="540"
-      height="960"
-      preload="auto"
-      muted
-      playsinline
-      aria-hidden="true">
-      <source src="/assets/hero/happy-llama-walk-v2.webm" type="video/webm" />
-    </video>
+    <img
+      class="hero-llama-media hero-llama-animated"
+      id="hero-llama-animated"
+      src="/assets/hero/happy-llama-walk-rest-v2.webp"
+      data-motion-src="/assets/hero/happy-llama-walk-v3.webp"
+      width="360"
+      height="640"
+      alt=""
+      draggable="false"
+      aria-hidden="true"
+    />
     <span class="sr-only">Play the Happy Llama walking animation</span>
   </button>
 
@@ -46,19 +46,22 @@
 <script>
   const stage = document.querySelector<HTMLElement>('#hero-stage');
   const trigger = document.querySelector<HTMLButtonElement>('#hero-video-trigger');
-  const llamaVideo = document.querySelector<HTMLVideoElement>('#hero-llama-video');
+  const llamaAnimated = document.querySelector<HTMLImageElement>('#hero-llama-animated');
   const tapCue = document.querySelector<HTMLElement>('.hero-tap-cue');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let celebrationTimer = 0;
   let walkingTimer = 0;
+  const motionSource = llamaAnimated?.dataset.motionSrc || '';
+
+  if (motionSource) {
+    const motionPreload = new Image();
+    motionPreload.src = motionSource;
+  }
 
   const resetWalk = () => {
     window.clearTimeout(walkingTimer);
     stage?.classList.remove('is-walking');
-    if (llamaVideo) {
-      llamaVideo.pause();
-      llamaVideo.currentTime = 0;
-    }
+    if (llamaAnimated) llamaAnimated.src = '/assets/hero/happy-llama-walk-rest-v2.webp';
     trigger?.setAttribute('aria-label', 'Make the Happy Llama walk');
     if (tapCue) tapCue.textContent = 'Tap the llama';
   };
@@ -74,18 +77,18 @@
   trigger?.addEventListener('click', () => {
     celebrate();
     window.dispatchEvent(new CustomEvent('happy-llama:retype'));
-    if (!stage || !llamaVideo || reducedMotion.matches) return;
-    llamaVideo.pause();
-    llamaVideo.currentTime = 0;
+    if (!stage || !llamaAnimated || !motionSource || reducedMotion.matches) return;
+    llamaAnimated.removeAttribute('src');
     stage.classList.add('is-walking');
     trigger.setAttribute('aria-label', 'Replay the Happy Llama walk');
     if (tapCue) tapCue.textContent = 'Walking…';
-    llamaVideo.play().catch(resetWalk);
-    walkingTimer = window.setTimeout(resetWalk, 8500);
+    requestAnimationFrame(() => {
+      llamaAnimated.src = motionSource;
+    });
+    walkingTimer = window.setTimeout(resetWalk, 8200);
   });
 
-  llamaVideo?.addEventListener('ended', resetWalk);
-  llamaVideo?.addEventListener('error', () => {
+  llamaAnimated?.addEventListener('error', () => {
     resetWalk();
     if (tapCue) tapCue.textContent = 'Tap to retry';
   });
