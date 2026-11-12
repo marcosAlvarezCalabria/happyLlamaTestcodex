@@ -1,0 +1,53 @@
+---
+import BrandMark from './BrandMark.astro';
+import Hero from './Hero.astro';
+import LlamaDressup from './LlamaDressup.astro';
+---
+
+<main class="viewer-shell" data-mode="viewer" lang="en">
+  <header class="viewer-header">
+    <BrandMark compact />
+    <span class="tiny-keepsake">A little keepsake</span>
+  </header>
+
+  <Hero />
+
+  <section class="message-wrap" aria-labelledby="gift-message">
+    <div class="message-card scene-0" id="message-card">
+      <div class="message-card-scene" aria-hidden="true"></div>
+      <div class="message-content">
+        <p>A keepsake from Galway</p>
+        <blockquote id="gift-message">A little Galway hello, especially for you.</blockquote>
+        <span id="gift-from">With love, Happy Llama</span>
+      </div>
+      <div class="message-seal" aria-hidden="true">🦙</div>
+    </div>
+  </section>
+
+  <LlamaDressup />
+
+  <footer class="viewer-footer">
+    <span>🦙 Happy Llama</span>
+    <a href="https://www.happyllama.ie/" target="_blank" rel="noreferrer">
+      Discover Happy Llama <span aria-hidden="true">↗</span>
+    </a>
+  </footer>
+</main>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const giftMessage = document.querySelector<HTMLElement>('#gift-message');
+  const giftFrom = document.querySelector<HTMLElement>('#gift-from');
+  const messageCard = document.querySelector<HTMLElement>('#message-card');
+  const heroStage = document.querySelector<HTMLElement>('#hero-stage');
+  const rawScene = Number.parseInt(params.get('b') || '0', 10);
+  const scene = Number.isFinite(rawScene) ? Math.min(5, Math.max(0, rawScene)) : 0;
+  const message = (params.get('t') || 'A little Galway hello, especially for you.').slice(0, 120);
+  const from = (params.get('f') || 'With love, Happy Llama').slice(0, 60);
+
+  if (giftMessage) giftMessage.textContent = message;
+  if (giftFrom) giftFrom.textContent = from;
+  if (messageCard) messageCard.className = `message-card scene-${scene}`;
+  if (heroStage) heroStage.className = `hero-stage scene-${scene}`;
+  document.documentElement.lang = 'en';
+</script>

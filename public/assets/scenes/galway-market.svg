@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1200" height="900" fill="#bcebff"/>
+  <circle cx="970" cy="135" r="75" fill="#fff5a8"/>
+  <path d="M0 500 170 420l190 65 176-125 188 106 208-128 268 153v409H0Z" fill="#4fbf84"/>
+  <path d="M0 585 180 520l180 55 180-75 205 80 220-73 235 74v319H0Z" fill="#157f68"/>
+  <g stroke="#2a2230" stroke-width="8" stroke-linejoin="round">
+    <path d="M90 370h240v330H90Z" fill="#ff796a"/><path d="M330 405h225v295H330Z" fill="#fffdf7"/><path d="M555 350h255v350H555Z" fill="#ff0088"/><path d="M810 398h250v302H810Z" fill="#fff5a8"/>
+    <path d="M70 372 210 260l140 112M310 405l130-95 135 95M535 351l145-118 150 118M790 400l142-104 150 104" fill="#7456c9"/>
+    <g fill="#bcebff"><path d="M143 455h68v105h-68Z"/><path d="M403 480h68v105h-68Z"/><path d="M644 445h78v115h-78Z"/><path d="M900 475h70v108h-70Z"/></g>
+  </g>
+  <path d="M0 690q180-70 350 0t350 0 350 0 350 0v210H0Z" fill="#5aa9c4"/>
+  <g fill="#fff" opacity=".86"><path d="m100 120 25-20 25 20 25-20 25 20"/><path d="m370 165 25-20 25 20 25-20 25 20"/><path d="m740 95 25-20 25 20 25-20 25 20"/></g>
+</svg>

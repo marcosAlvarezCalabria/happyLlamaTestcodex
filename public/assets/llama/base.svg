@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" role="img" aria-labelledby="title desc">
+  <title id="title">Happy Llama placeholder</title>
+  <desc id="desc">A cheerful cream-coloured illustrated llama, ready to be replaced with a real product photograph.</desc>
+  <defs>
+    <linearGradient id="wool" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf2"/>
+      <stop offset="1" stop-color="#eed9ba"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="13" stdDeviation="11" flood-color="#2a2230" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)" stroke="#2a2230" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M165 540c-13-82-15-154 2-230 11-48 31-81 65-97 38-18 96-10 120 25 20 29 17 73 16 111-1 58 10 126-3 191" fill="url(#wool)"/>
+    <path d="M208 269c-9-42-8-79-2-117 8-52 35-89 77-88 45 0 66 38 66 87l-2 124" fill="url(#wool)"/>
+    <path d="m229 111-36-66c-5-10 5-19 14-12l44 34" fill="#f6e7cd"/>
+    <path d="m325 81 55-46c9-8 20 2 14 12l-42 74" fill="#f6e7cd"/>
+    <path d="M235 153c28-17 76-16 105 1 13 8 22 22 22 39 0 29-22 52-57 56-43 5-82-7-87-40-3-22 3-45 17-56Z" fill="#fff8e9"/>
+    <ellipse cx="258" cy="174" rx="8" ry="10" fill="#2a2230" stroke="none"/>
+    <ellipse cx="324" cy="174" rx="8" ry="10" fill="#2a2230" stroke="none"/>
+    <path d="M282 199c8 7 17 7 25 0M294 197v12" fill="none" stroke-width="5"/>
+    <path d="M242 143c11-8 21-9 31-5M311 138c10-4 20-2 29 5" fill="none" stroke-width="5"/>
+    <path d="M174 332c-36 10-58 39-54 74 4 37 31 58 62 59M355 333c38 6 63 31 62 66-1 38-27 61-58 64" fill="none"/>
+    <path d="M176 530v42M236 530v42M298 530v42M360 530v42" fill="none"/>
+  </g>
+  <g fill="#ff0088" stroke="#2a2230" stroke-width="5">
+    <circle cx="211" cy="285" r="12"/><circle cx="238" cy="276" r="10"/><circle cx="266" cy="283" r="12"/>
+    <circle cx="294" cy="276" r="10"/><circle cx="322" cy="285" r="12"/>
+  </g>
+  <g fill="#fff5a8">
+    <circle cx="258" cy="174" r="2.5"/><circle cx="324" cy="174" r="2.5"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <rect width="1200" height="900" fill="#91def5"/>
+  <circle cx="196" cy="150" r="82" fill="#fff5a8"/>
+  <path d="M0 562 215 330l130 118 183-292 146 219 162-166 364 352v339H0Z" fill="#7456c9"/>
+  <path d="m405 352 123-196 110 165-77-26-38 34-50-25Z" fill="#fffdf7"/>
+  <path d="M0 610q184-97 354-19 165 77 300 1 171-95 328-18 96 47 218-6v332H0Z" fill="#4fbf84"/>
+  <path d="M0 700q235-77 401 0t401 0 398-6v206H0Z" fill="#e9ba61"/>
+  <g fill="#2a2230">
+    <path d="M176 639c-18-48 12-90 59-91 46-1 74 40 56 88l-16 42H194Z"/><path d="m205 570-16-37 35 25M266 570l21-36-39 25"/>
+    <path d="M845 633c-15-40 10-76 50-77 39 0 63 35 48 76l-13 35h-73Z"/><path d="m870 575-14-31 30 21M922 575l18-31-33 21"/>
+  </g>
+  <g fill="#fffdf7"><circle cx="222" cy="582" r="7"/><circle cx="262" cy="582" r="7"/><circle cx="882" cy="585" r="6"/><circle cx="916" cy="585" r="6"/></g>
+  <g stroke="#ff0088" stroke-width="14"><path d="M195 621h80M858 617h72"/></g>
+</svg>

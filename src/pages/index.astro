@@ -1,0 +1,45 @@
+---
+/**
+ * THESIS: An NFC keepsake opens like a pocket retablo, not a generic web form.
+ * OWN-WORLD: Happy pink, butter yellow, ink outlines, cut-paper scenes, scalloped edges.
+ * STORY: The seller creates one link; the recipient opens a personal scene and dresses the llama.
+ * FIRST VIEWPORT: Creator shows message-making beside its live card; viewer gives the llama the stage.
+ * FORM: A mobile keepsake/workbench hybrid, derived directly from SPEC-HL-004 and the supplied brand.
+ */
+import '@fontsource-variable/nunito';
+import Creator from '../components/Creator.astro';
+import Viewer from '../components/Viewer.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ff0088" />
+    <meta
+      name="description"
+      content="Crea y abre una tarjeta de recuerdo interactiva de Happy Llama."
+    />
+    <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" />
+    <title>Happy Llama · A little keepsake</title>
+    <script is:inline>
+      try {
+        const query = new URLSearchParams(location.search);
+        if (query.has('t') || query.has('id')) document.documentElement.classList.add('viewer-mode');
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <Creator />
+    <Viewer />
+
+    <script>
+      document.documentElement.classList.add('js-ready');
+      if ('serviceWorker' in navigator && import.meta.env.PROD) {
+        window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+      }
+    </script>
+  </body>
+</html>

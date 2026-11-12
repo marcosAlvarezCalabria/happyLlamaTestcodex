@@ -1,0 +1,41 @@
+<section class="hero-stage scene-0" id="hero-stage" aria-labelledby="hero-title">
+  <h1 class="sr-only" id="hero-title">Your Happy Llama keepsake</h1>
+  <div class="scene-depth scene-depth-back" aria-hidden="true"></div>
+  <div class="scene-depth scene-depth-front" aria-hidden="true"></div>
+
+  <button class="hero-llama" id="hero-llama" type="button" aria-label="Make the llama jump">
+    <img src="/assets/hero/llama.svg" alt="A cheerful illustrated llama" width="500" height="600" />
+    <span class="tap-hint"><span aria-hidden="true">☝️</span> Tap me!</span>
+  </button>
+
+  <div class="spark-field" aria-hidden="true">
+    <i>✦</i><i>♥</i><i>✦</i><i>★</i><i>♥</i><i>✦</i>
+  </div>
+  <div class="scene-badge" aria-hidden="true"><span>Perú</span><i>→</i><span>Galway</span></div>
+</section>
+
+<script>
+  const stage = document.querySelector<HTMLElement>('#hero-stage');
+  const llama = document.querySelector<HTMLButtonElement>('#hero-llama');
+  let celebrationTimer = 0;
+
+  const onHeroTap = () => {
+    if (!stage) return;
+    window.clearTimeout(celebrationTimer);
+    stage.classList.remove('is-celebrating');
+    requestAnimationFrame(() => stage.classList.add('is-celebrating'));
+    celebrationTimer = window.setTimeout(() => stage.classList.remove('is-celebrating'), 900);
+  };
+
+  llama?.addEventListener('click', onHeroTap);
+  stage?.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch') return;
+    const box = stage.getBoundingClientRect();
+    stage.style.setProperty('--pointer-x', `${((event.clientX - box.left) / box.width - 0.5) * 10}px`);
+    stage.style.setProperty('--pointer-y', `${((event.clientY - box.top) / box.height - 0.5) * 8}px`);
+  });
+  stage?.addEventListener('pointerleave', () => {
+    stage.style.setProperty('--pointer-x', '0px');
+    stage.style.setProperty('--pointer-y', '0px');
+  });
+</script>

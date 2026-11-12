@@ -1,0 +1,205 @@
+---
+import BrandMark from './BrandMark.astro';
+
+const scenes = [
+  { name: 'Galway Market', src: '/assets/scenes/galway-market.svg' },
+  { name: 'Cusco', src: '/assets/scenes/cusco.svg' },
+  { name: 'Machu Picchu', src: '/assets/scenes/machu-picchu.svg' },
+  { name: 'The Andes', src: '/assets/scenes/andes.svg' },
+  { name: 'Irish Coast', src: '/assets/scenes/irish-coast.svg' },
+  { name: 'Warm Weave', src: '/assets/scenes/warm-weave.svg' },
+];
+---
+
+<main class="creator-shell" data-mode="creator">
+  <header class="creator-header page-width">
+    <BrandMark />
+    <div class="header-note">
+      <span class="nfc-dot" aria-hidden="true"></span>
+      Recuerdo NFC
+    </div>
+  </header>
+
+  <div class="creator-grid page-width">
+    <section class="creator-copy" aria-labelledby="creator-title">
+      <p class="kicker">De Galway, con cariño</p>
+      <h1 id="creator-title">Crea un recuerdo que viaja con su llama.</h1>
+      <p class="intro">
+        Escribe una dedicatoria, elige la escena y copia el enlace que grabarás en el colgante.
+      </p>
+
+      <form class="keepsake-form" id="keepsake-form" novalidate>
+        <label for="message">
+          Mensaje
+          <span class="character-count"><span id="message-count">0</span>/120</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          maxlength="120"
+          rows="4"
+          placeholder="I was in Galway and thought of you 🦙"
+          required></textarea>
+        <p class="field-error" id="message-error" hidden>Escribe primero un mensaje para el recuerdo.</p>
+
+        <label for="from">De parte de <span class="optional">opcional</span></label>
+        <input id="from" name="from" type="text" maxlength="60" placeholder="With love, María" />
+
+        <fieldset class="scene-fieldset">
+          <legend>Elige una escena</legend>
+          <div class="scene-picker">
+            {
+              scenes.map((scene, index) => (
+                <label class="scene-choice" title={scene.name}>
+                  <input type="radio" name="scene" value={index} checked={index === 0} />
+                  <span class="scene-swatch" style={`--scene-image: url('${scene.src}')`}>
+                    <span>{scene.name}</span>
+                  </span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <button class="primary-button" id="copy-link" type="submit" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8.5 12.5 15 6a3 3 0 0 1 4.2 4.2l-8.5 8.5a5 5 0 0 1-7.1-7.1l8-8" />
+          </svg>
+          <span>Copiar enlace para la pegatina</span>
+        </button>
+        <p class="microcopy">Graba este enlace en el colgante con NFC Tools.</p>
+
+        <div class="link-result" id="link-result" hidden>
+          <p id="copy-status" role="status"></p>
+          <a id="generated-link" href="#" target="_blank" rel="noreferrer"></a>
+          <button class="text-button" id="open-preview" type="button">Abrir la vista del regalo →</button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="preview-zone" aria-label="Vista previa del recuerdo">
+      <div class="preview-label"><span></span> Vista previa en vivo</div>
+      <div class="keepsake-card scene-0" id="live-preview">
+        <div class="preview-scene" aria-hidden="true"></div>
+        <div class="preview-llama" aria-hidden="true">
+          <img src="/assets/llama/base.svg" alt="" />
+        </div>
+        <div class="preview-message">
+          <p>A keepsake from Galway</p>
+          <blockquote id="preview-message">I was in Galway and thought of you 🦙</blockquote>
+          <span id="preview-from">With love, Happy Llama</span>
+        </div>
+        <div class="card-stitch" aria-hidden="true"></div>
+      </div>
+      <p class="preview-tip">El mensaje viaja dentro del enlace. No guardamos ningún dato.</p>
+    </aside>
+  </div>
+
+  <footer class="creator-footer page-width">
+    <span>🦙 Happy Llama</span>
+    <span>Hecho en Perú · Terminado en Galway</span>
+  </footer>
+</main>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#keepsake-form');
+  const message = document.querySelector<HTMLTextAreaElement>('#message');
+  const from = document.querySelector<HTMLInputElement>('#from');
+  const copyButton = document.querySelector<HTMLButtonElement>('#copy-link');
+  const previewMessage = document.querySelector<HTMLElement>('#preview-message');
+  const previewFrom = document.querySelector<HTMLElement>('#preview-from');
+  const count = document.querySelector<HTMLElement>('#message-count');
+  const livePreview = document.querySelector<HTMLElement>('#live-preview');
+  const linkResult = document.querySelector<HTMLElement>('#link-result');
+  const generatedLink = document.querySelector<HTMLAnchorElement>('#generated-link');
+  const copyStatus = document.querySelector<HTMLElement>('#copy-status');
+  const openPreview = document.querySelector<HTMLButtonElement>('#open-preview');
+  const error = document.querySelector<HTMLElement>('#message-error');
+
+  const sampleMessage = 'I was in Galway and thought of you 🦙';
+  const sampleFrom = 'With love, Happy Llama';
+
+  const selectedScene = () => Number(new FormData(form!).get('scene') ?? 0);
+
+  const updatePreview = () => {
+    const text = message?.value.trim() || sampleMessage;
+    const signature = from?.value.trim() || sampleFrom;
+    if (previewMessage) previewMessage.textContent = text;
+    if (previewFrom) previewFrom.textContent = signature;
+    if (count) count.textContent = String(message?.value.length ?? 0);
+    if (copyButton) copyButton.disabled = !(message?.value.trim());
+    if (message?.value.trim() && error) error.hidden = true;
+
+    if (livePreview) {
+      livePreview.className = `keepsake-card scene-${selectedScene()}`;
+    }
+  };
+
+  const makeId = () => {
+    const values = new Uint32Array(1);
+    crypto.getRandomValues(values);
+    return values[0].toString(36).slice(0, 5).padEnd(5, 'x');
+  };
+
+  const copyText = async (text: string) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    const helper = document.createElement('textarea');
+    helper.value = text;
+    helper.setAttribute('readonly', '');
+    helper.style.position = 'fixed';
+    helper.style.opacity = '0';
+    document.body.append(helper);
+    helper.select();
+    const copied = document.execCommand('copy');
+    helper.remove();
+    return copied;
+  };
+
+  form?.addEventListener('input', updatePreview);
+  form?.addEventListener('change', updatePreview);
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const text = message?.value.trim() ?? '';
+    if (!text) {
+      if (error) error.hidden = false;
+      message?.focus();
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.hash = '';
+    url.searchParams.set('id', makeId());
+    url.searchParams.set('t', text);
+    url.searchParams.set('b', String(selectedScene()));
+    const signature = from?.value.trim();
+    if (signature) url.searchParams.set('f', signature);
+
+    if (linkResult && generatedLink && copyStatus && openPreview) {
+      generatedLink.href = url.toString();
+      generatedLink.textContent = url.toString();
+      openPreview.dataset.url = url.toString();
+      linkResult.hidden = false;
+      try {
+        const copied = await copyText(url.toString());
+        copyStatus.textContent = copied
+          ? '✓ Enlace copiado. Ya puedes grabarlo en el NFC.'
+          : 'Enlace listo. Mantén pulsado para copiarlo.';
+      } catch {
+        copyStatus.textContent = 'Enlace listo. Mantén pulsado para copiarlo.';
+      }
+      linkResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  openPreview?.addEventListener('click', () => {
+    const url = openPreview.dataset.url;
+    if (url) window.open(url, '_blank', 'noopener,noreferrer');
+  });
+
+  updatePreview();
+</script>

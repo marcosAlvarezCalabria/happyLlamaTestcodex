@@ -1,0 +1,11 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<a class:list={['brand-mark', { compact }]} href="/" aria-label="Happy Llama · inicio">
+  <img src="/assets/brand/happy-llama-logo.png" alt="Happy Llama" width="148" height="82" />
+</a>
