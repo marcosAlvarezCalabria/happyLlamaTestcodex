@@ -771,7 +771,13 @@ h2 {
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(22, 10, 26, 0.36) 0%, transparent 19%),
+    linear-gradient(
+      180deg,
+      rgba(22, 10, 26, 0.72) 0%,
+      rgba(22, 10, 26, 0.45) 18%,
+      rgba(22, 10, 26, 0.18) 31%,
+      transparent 44%
+    ),
     linear-gradient(180deg, transparent 67%, rgba(22, 10, 26, 0.64) 100%);
 }
 
@@ -829,22 +835,17 @@ h2 {
 .hero-gift-copy {
   position: absolute;
   z-index: 4;
-  inset: clamp(88px, 11dvh, 126px) 16px auto;
+  inset: clamp(92px, 12dvh, 132px) 20px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: min(calc(100% - 32px), 480px);
+  width: min(calc(100% - 40px), 540px);
   min-height: 0;
   margin-inline: auto;
   pointer-events: none;
-  border: 3px solid var(--ink);
-  border-radius: 15px;
-  background: rgba(255, 253, 247, 0.97);
-  color: var(--ink);
-  padding: 12px 15px 11px;
-  box-shadow: 0 7px 0 var(--pink), 0 16px 28px rgba(22, 10, 26, 0.24);
+  color: #fff;
   text-align: left;
-  text-shadow: none;
+  text-shadow: 0 2px 4px rgba(14, 6, 17, 0.76), 0 8px 22px rgba(14, 6, 17, 0.5);
 }
 
 .hero-gift-copy::after {
@@ -852,29 +853,34 @@ h2 {
 }
 
 .hero-gift-copy p {
-  margin: 0 0 5px;
-  color: #7a355f;
-  font-size: 0.6rem;
+  margin: 0 0 8px;
+  color: var(--butter);
+  font-size: 0.66rem;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
 .hero-gift-copy blockquote {
   min-height: 1.08em;
   margin: 0;
-  font-size: clamp(0.96rem, 4.25vw, 1.35rem);
+  font-size: clamp(1.45rem, 6.6vw, 2.35rem);
   font-weight: 900;
-  letter-spacing: -0.025em;
-  line-height: 1.02;
+  letter-spacing: -0.03em;
+  line-height: 1.03;
   overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .hero-gift-copy > span {
-  margin-top: 6px;
-  color: #6d3d5b;
-  font-size: 0.7rem;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.82rem;
   font-weight: 800;
+}
+
+.hero-gift-copy .type-caret {
+  background: var(--butter);
 }
 
 .type-caret {
@@ -1089,9 +1095,8 @@ h2 {
   }
 
   .hero-gift-copy {
-    inset-inline: 12px;
-    width: calc(100% - 24px);
-    padding: 11px 13px 10px;
+    inset-inline: 16px;
+    width: calc(100% - 32px);
   }
 
   .reminder-body {
@@ -1112,11 +1117,22 @@ h2 {
 
 @media (max-height: 700px) {
   .hero-gift-copy {
-    inset-block-start: clamp(76px, 13dvh, 92px);
+    inset-block-start: clamp(76px, 12dvh, 88px);
+    width: min(calc(100% - 32px), 460px);
+  }
+
+  .hero-gift-copy p {
+    margin-bottom: 6px;
+    font-size: 0.58rem;
   }
 
   .hero-gift-copy blockquote {
-    font-size: clamp(0.86rem, 3.8vw, 1.08rem);
+    font-size: clamp(1.15rem, 5.2vw, 1.45rem);
+  }
+
+  .hero-gift-copy > span {
+    margin-top: 7px;
+    font-size: 0.72rem;
   }
 
   .hero-llama-media {

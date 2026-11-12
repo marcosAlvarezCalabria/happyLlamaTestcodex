@@ -19,7 +19,7 @@ Message, optional signature, and one of eight supplied scenes are the only creat
 
 ## Direction and memorable moment
 
-A vivid pocket-retablo reminder joins Peru and Galway. The Higgsfield motion fills the whole screen without a card, the personal message types onto a sign above the llama, and the walk plays when tapped.
+A vivid pocket-retablo reminder joins Peru and Galway. The Higgsfield motion fills the whole screen without a card, the personal message types directly over a contrast-protected upper zone that stays clear of the llama, and the walk plays when tapped.
 
 ## Production assets
 

@@ -20,15 +20,15 @@ Nunito Variable is self-hosted through the build. Headings use 800–900; body a
 
 ## Shape and material
 
-The reminder is one full-height Higgsfield motion scene with no inner card or second scenic layer. The personal message sits on one tactile paper sign above the llama. Creator controls remain sturdy and tactile. Radii are 14–28px; pills are used only for small status labels.
+The reminder is one full-height Higgsfield motion scene with no inner card or second scenic layer. The personal message sits directly over the upper part of the photograph in large, high-contrast type, with a soft scene-wide contrast fade instead of a container. Creator controls remain sturdy and tactile. Radii are 14–28px; pills are used only for small status labels.
 
 ## Composition
 
-Mobile is the primary canvas. The viewer is one edge-to-edge motion background with no framed card, catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message lives on the sign above the llama. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
+Mobile is the primary canvas. The viewer is one edge-to-edge motion background with no framed card, catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message uses a reserved upper text zone that remains clear of the visible llama, including with long copy and short screens. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
 
 ## Motion
 
-One authored moment owns the experience: the message types itself onto the sign, then tapping the llama repeats the typing while the Higgsfield walk plays once and returns to its opening frame. A brief fan of stars acknowledges the tap.
+One authored moment owns the experience: the message types itself over the scene, then tapping the llama repeats the typing while the Higgsfield walk plays once and returns to its opening frame. A brief fan of stars acknowledges the tap.
 
 ## Accessibility and resilience
 
