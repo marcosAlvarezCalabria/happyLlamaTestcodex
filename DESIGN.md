@@ -24,11 +24,11 @@ The reminder is one full-height photographic piece with a framed moving memory, 
 
 ## Composition
 
-Mobile is the primary canvas. The viewer is a single full-height reminder with no catalogue sections, accessory controls, or commercial footer. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
+Mobile is the primary canvas. The viewer is a single full-height reminder with no catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message lives inside the upper part of the moving memory. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
 
 ## Motion
 
-One authored moment owns the experience: the hero remains still until the recipient taps it, then the llama takes three playful steps, pauses, and returns to its resting frame. A brief fan of stars acknowledges the tap. Nothing autoplays.
+One authored moment owns the experience: the message types itself into the hero, then tapping the llama repeats the typing while the llama takes three playful steps and returns to rest. A brief fan of stars acknowledges the tap; the video never autoplays.
 
 ## Accessibility and resilience
 

@@ -14,12 +14,6 @@ import Hero from './Hero.astro';
       <div class="reminder-media">
         <Hero />
       </div>
-
-      <section class="reminder-message" aria-labelledby="gift-message">
-        <p>From Galway, with love</p>
-        <blockquote id="gift-message">A little Galway hello, especially for you.</blockquote>
-        <span id="gift-from">With love, Happy Llama</span>
-      </section>
     </div>
 
     <footer class="reminder-origin">Made in Peru <span aria-hidden="true">·</span> Finished in Galway</footer>
@@ -29,6 +23,7 @@ import Hero from './Hero.astro';
 <script>
   const params = new URLSearchParams(window.location.search);
   const giftMessage = document.querySelector<HTMLElement>('#gift-message');
+  const giftMessageTyped = document.querySelector<HTMLElement>('#gift-message-typed');
   const giftFrom = document.querySelector<HTMLElement>('#gift-from');
   const reminderCard = document.querySelector<HTMLElement>('#reminder-card');
   const rawScene = Number.parseInt(params.get('b') || '0', 10);
@@ -37,7 +32,47 @@ import Hero from './Hero.astro';
   const from = (params.get('f') || 'With love, Happy Llama').slice(0, 60);
 
   if (giftMessage) giftMessage.textContent = message;
+  if (giftMessageTyped) giftMessageTyped.textContent = message;
   if (giftFrom) giftFrom.textContent = from;
   if (reminderCard) reminderCard.className = `reminder-card scene-${scene}`;
   document.documentElement.lang = 'en';
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let typingFrame = 0;
+  let typingDelay = 0;
+
+  const typeGiftMessage = () => {
+    if (!giftMessageTyped) return;
+    window.cancelAnimationFrame(typingFrame);
+    window.clearTimeout(typingDelay);
+    giftMessageTyped.classList.remove('is-typing');
+
+    if (reducedMotion.matches) {
+      giftMessageTyped.textContent = message;
+      return;
+    }
+
+    giftMessageTyped.textContent = '';
+    giftMessageTyped.classList.add('is-typing');
+    const duration = Math.min(3600, Math.max(900, message.length * 36));
+
+    typingDelay = window.setTimeout(() => {
+      const startedAt = performance.now();
+      const draw = (now: number) => {
+        const progress = Math.min(1, (now - startedAt) / duration);
+        const visibleCharacters = Math.max(1, Math.ceil(message.length * progress));
+        giftMessageTyped.textContent = message.slice(0, visibleCharacters);
+        if (progress < 1) {
+          typingFrame = window.requestAnimationFrame(draw);
+        } else {
+          giftMessageTyped.classList.remove('is-typing');
+        }
+      };
+      typingFrame = window.requestAnimationFrame(draw);
+    }, 260);
+  };
+
+  window.addEventListener('happy-llama:retype', typeGiftMessage);
+  reducedMotion.addEventListener('change', typeGiftMessage);
+  typeGiftMessage();
 </script>

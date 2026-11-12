@@ -19,7 +19,7 @@ Message, optional signature, and one of eight supplied scenes are the only creat
 
 ## Direction and memorable moment
 
-A vivid pocket-retablo reminder joins Peru and Galway. The signature moment is the llama film's joyful tap reaction inside one full-height personal message.
+A vivid pocket-retablo reminder joins Peru and Galway. The personal message types itself inside the film's upper panel, then replays alongside the llama's joyful tap reaction.
 
 ## Production assets
 

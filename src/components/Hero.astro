@@ -25,6 +25,18 @@
     <span class="sr-only">Play the Happy Llama walking animation</span>
   </button>
 
+  <section class="hero-gift-copy" aria-labelledby="gift-message">
+    <p>A little reminder from Galway</p>
+    <blockquote>
+      <span class="sr-only" id="gift-message">A little Galway hello, especially for you.</span>
+      <span id="gift-message-typed" aria-hidden="true">A little Galway hello, especially for you.</span>
+      <span class="type-caret" aria-hidden="true"></span>
+    </blockquote>
+    <span id="gift-from">With love, Happy Llama</span>
+  </section>
+
+  <span class="hero-tap-cue" aria-hidden="true">Tap the llama</span>
+
   <div class="spark-field" aria-hidden="true">
     <i>✦</i><i>♥</i><i>✦</i><i>★</i><i>♥</i><i>✦</i>
   </div>
@@ -52,6 +64,7 @@
 
   trigger?.addEventListener('click', () => {
     celebrate();
+    window.dispatchEvent(new CustomEvent('happy-llama:retype'));
     if (!video) return;
     video.currentTime = 0;
     stage?.classList.add('is-walking');

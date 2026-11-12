@@ -1,4 +1,4 @@
-const CACHE = 'happy-llama-reminder-v6';
+const CACHE = 'happy-llama-reminder-v7';
 const CORE = [
   '/',
   '/assets/brand/happy-llama-logo.png',
