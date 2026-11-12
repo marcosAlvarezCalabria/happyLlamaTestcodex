@@ -16,23 +16,29 @@ const scenes = [
 <main class="creator-shell" data-mode="creator">
   <header class="creator-header page-width">
     <BrandMark />
-    <div class="header-note">
-      <span class="nfc-dot" aria-hidden="true"></span>
-      Recordatorio NFC
+    <div class="creator-header-actions">
+      <div class="language-switch" role="group" aria-label="Idioma / Language">
+        <button type="button" data-language="es" aria-pressed="true">ES</button>
+        <button type="button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+      <div class="header-note">
+        <span class="nfc-dot" aria-hidden="true"></span>
+        <span data-i18n="nfcLabel">Recordatorio NFC</span>
+      </div>
     </div>
   </header>
 
   <div class="creator-grid page-width">
     <section class="creator-copy" aria-labelledby="creator-title">
-      <p class="kicker">De Galway, con cariño</p>
-      <h1 id="creator-title">Crea un recordatorio que viaja con su llama.</h1>
-      <p class="intro">
+      <p class="kicker" data-i18n="kicker">De Galway, con cariño</p>
+      <h1 id="creator-title" data-i18n="title">Crea un recordatorio que viaja con su llama.</h1>
+      <p class="intro" data-i18n="intro">
         Escribe unas palabras, elige el lugar y copia el enlace que grabarás en el colgante.
       </p>
 
       <form class="keepsake-form" id="keepsake-form" novalidate>
-        <div class="mobile-live-preview" aria-label="Vista previa que se actualiza mientras editas">
-          <div class="mobile-preview-label"><span></span> Vista previa mientras escribes</div>
+        <div class="mobile-live-preview" aria-label="Vista previa que se actualiza mientras editas" data-i18n-aria="livePreviewAria">
+          <div class="mobile-preview-label"><i aria-hidden="true"></i><span data-i18n="previewWhileTyping">Vista previa mientras escribes</span></div>
           <div class="mobile-preview-card scene-0" data-live-preview>
             <div class="mobile-preview-scene" aria-hidden="true"></div>
             <img
@@ -52,7 +58,7 @@ const scenes = [
         </div>
 
         <label for="message">
-          Mensaje
+          <span data-i18n="messageLabel">Mensaje</span>
           <span class="character-count"><span id="message-count">0</span>/120</span>
         </label>
         <textarea
@@ -62,13 +68,13 @@ const scenes = [
           rows="4"
           placeholder="I was in Galway and thought of you 🦙"
           required></textarea>
-        <p class="field-error" id="message-error" hidden>Escribe primero el mensaje del recordatorio.</p>
+        <p class="field-error" id="message-error" data-i18n="messageError" hidden>Escribe primero el mensaje del recordatorio.</p>
 
-        <label for="from">De parte de <span class="optional">opcional</span></label>
+        <label for="from"><span data-i18n="fromLabel">De parte de</span> <span class="optional" data-i18n="optional">opcional</span></label>
         <input id="from" name="from" type="text" maxlength="60" placeholder="With love, María" />
 
         <fieldset class="scene-fieldset">
-          <legend>Elige una escena</legend>
+          <legend data-i18n="sceneLegend">Elige una escena</legend>
           <div class="scene-picker">
             {
               scenes.map((scene, index) => (
@@ -87,20 +93,20 @@ const scenes = [
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M8.5 12.5 15 6a3 3 0 0 1 4.2 4.2l-8.5 8.5a5 5 0 0 1-7.1-7.1l8-8" />
           </svg>
-          <span>Copiar enlace para la pegatina</span>
+          <span data-i18n="copyButton">Copiar enlace para la pegatina</span>
         </button>
-        <p class="microcopy">Graba este enlace en el colgante con NFC Tools.</p>
+        <p class="microcopy" data-i18n="microcopy">Graba este enlace en el colgante con NFC Tools.</p>
 
         <div class="link-result" id="link-result" hidden>
           <p id="copy-status" role="status"></p>
           <a id="generated-link" href="#" target="_blank" rel="noreferrer"></a>
-          <button class="text-button" id="open-preview" type="button">Abrir la vista del regalo →</button>
+          <button class="text-button" id="open-preview" type="button" data-i18n="openPreview">Abrir la vista del regalo →</button>
         </div>
       </form>
     </section>
 
-    <aside class="preview-zone" aria-label="Vista previa del recordatorio">
-      <div class="preview-label"><span></span> Vista previa en vivo</div>
+    <aside class="preview-zone" aria-label="Vista previa del recordatorio" data-i18n-aria="desktopPreviewAria">
+      <div class="preview-label"><i aria-hidden="true"></i><span data-i18n="livePreview">Vista previa en vivo</span></div>
       <div class="keepsake-card scene-0" data-live-preview>
         <div class="preview-scene" aria-hidden="true"></div>
         <div class="preview-llama" aria-hidden="true">
@@ -113,13 +119,13 @@ const scenes = [
         </div>
         <div class="card-stitch" aria-hidden="true"></div>
       </div>
-      <p class="preview-tip">El mensaje viaja dentro del enlace. No guardamos ningún dato.</p>
+      <p class="preview-tip" data-i18n="privacyTip">El mensaje viaja dentro del enlace. No guardamos ningún dato.</p>
     </aside>
   </div>
 
   <footer class="creator-footer page-width">
     <span>🦙 Happy Llama</span>
-    <span>Hecho en Perú · Terminado en Galway</span>
+    <span data-i18n="footerOrigin">Hecho en Perú · Terminado en Galway</span>
   </footer>
 </main>
 
@@ -137,6 +143,81 @@ const scenes = [
   const copyStatus = document.querySelector<HTMLElement>('#copy-status');
   const openPreview = document.querySelector<HTMLButtonElement>('#open-preview');
   const error = document.querySelector<HTMLElement>('#message-error');
+  const languageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-language]'));
+
+  type CreatorLanguage = 'es' | 'en';
+
+  const translations: Record<CreatorLanguage, Record<string, string>> = {
+    es: {
+      nfcLabel: 'Recordatorio NFC',
+      kicker: 'De Galway, con cariño',
+      title: 'Crea un recordatorio que viaja con su llama.',
+      intro: 'Escribe unas palabras, elige el lugar y copia el enlace que grabarás en el colgante.',
+      livePreviewAria: 'Vista previa que se actualiza mientras editas',
+      previewWhileTyping: 'Vista previa mientras escribes',
+      messageLabel: 'Mensaje',
+      messageError: 'Escribe primero el mensaje del recordatorio.',
+      fromLabel: 'De parte de',
+      optional: 'opcional',
+      sceneLegend: 'Elige una escena',
+      copyButton: 'Copiar enlace para la pegatina',
+      microcopy: 'Graba este enlace en el colgante con NFC Tools.',
+      openPreview: 'Abrir la vista del regalo →',
+      desktopPreviewAria: 'Vista previa del recordatorio',
+      livePreview: 'Vista previa en vivo',
+      privacyTip: 'El mensaje viaja dentro del enlace. No guardamos ningún dato.',
+      footerOrigin: 'Hecho en Perú · Terminado en Galway',
+      copied: '✓ Enlace copiado. Ya puedes grabarlo en el NFC.',
+      ready: 'Enlace listo. Mantén pulsado para copiarlo.',
+    },
+    en: {
+      nfcLabel: 'NFC reminder',
+      kicker: 'From Galway, with love',
+      title: 'Create a reminder that travels with their llama.',
+      intro: 'Write a few words, choose a place and copy the link you will save to the pendant.',
+      livePreviewAria: 'Preview that updates while you edit',
+      previewWhileTyping: 'Preview while you type',
+      messageLabel: 'Message',
+      messageError: 'Write the reminder message first.',
+      fromLabel: 'From',
+      optional: 'optional',
+      sceneLegend: 'Choose a scene',
+      copyButton: 'Copy link for the NFC tag',
+      microcopy: 'Save this link to the pendant with NFC Tools.',
+      openPreview: 'Open the gift view →',
+      desktopPreviewAria: 'Reminder preview',
+      livePreview: 'Live preview',
+      privacyTip: 'The message travels inside the link. We do not store any data.',
+      footerOrigin: 'Made in Peru · Finished in Galway',
+      copied: '✓ Link copied. You can now save it to the NFC tag.',
+      ready: 'Link ready. Press and hold to copy it.',
+    },
+  };
+
+  let currentLanguage: CreatorLanguage = 'es';
+
+  const applyLanguage = (language: CreatorLanguage) => {
+    currentLanguage = language;
+    document.documentElement.lang = language;
+    document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((element) => {
+      const key = element.dataset.i18n;
+      if (key && translations[language][key]) element.textContent = translations[language][key];
+    });
+    document.querySelectorAll<HTMLElement>('[data-i18n-aria]').forEach((element) => {
+      const key = element.dataset.i18nAria;
+      if (key && translations[language][key]) element.setAttribute('aria-label', translations[language][key]);
+    });
+    languageButtons.forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.language === language));
+    });
+    try {
+      localStorage.setItem('happy-llama-language', language);
+    } catch {}
+  };
+
+  languageButtons.forEach((button) => {
+    button.addEventListener('click', () => applyLanguage(button.dataset.language === 'en' ? 'en' : 'es'));
+  });
 
   const sampleMessage = 'I was in Galway and thought of you 🦙';
   const sampleFrom = 'With love, Happy Llama';
@@ -223,11 +304,9 @@ const scenes = [
       linkResult.hidden = false;
       try {
         const copied = await copyText(url.toString());
-        copyStatus.textContent = copied
-          ? '✓ Enlace copiado. Ya puedes grabarlo en el NFC.'
-          : 'Enlace listo. Mantén pulsado para copiarlo.';
+        copyStatus.textContent = copied ? translations[currentLanguage].copied : translations[currentLanguage].ready;
       } catch {
-        copyStatus.textContent = 'Enlace listo. Mantén pulsado para copiarlo.';
+        copyStatus.textContent = translations[currentLanguage].ready;
       }
       linkResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -238,5 +317,10 @@ const scenes = [
     if (url) window.open(url, '_blank', 'noopener,noreferrer');
   });
 
+  let savedLanguage: CreatorLanguage = 'es';
+  try {
+    savedLanguage = localStorage.getItem('happy-llama-language') === 'en' ? 'en' : 'es';
+  } catch {}
+  applyLanguage(savedLanguage);
   updatePreview();
 </script>
