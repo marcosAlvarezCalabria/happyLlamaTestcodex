@@ -16,7 +16,7 @@ Use the full palette in broad scene fields and small folk details. Keep form con
 
 ## Type
 
-Nunito Variable is self-hosted through the build. Headings use 800–900; body and controls use 600–750. Copy remains friendly, direct, and short.
+Nunito Variable is self-hosted through the build. Headings use 800–900; body and controls use 600–750. Copy remains friendly, direct, and short. The personal message is the primary display role: short messages use approximately twice the standard scale, while medium and long messages step down automatically to preserve the clear zone above the llama.
 
 ## Shape and material
 

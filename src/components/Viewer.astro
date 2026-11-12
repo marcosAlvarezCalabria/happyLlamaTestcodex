@@ -25,6 +25,7 @@ import Hero from './Hero.astro';
   const giftMessage = document.querySelector<HTMLElement>('#gift-message');
   const giftMessageTyped = document.querySelector<HTMLElement>('#gift-message-typed');
   const giftFrom = document.querySelector<HTMLElement>('#gift-from');
+  const giftCopy = document.querySelector<HTMLElement>('.hero-gift-copy');
   const reminderCard = document.querySelector<HTMLElement>('#reminder-card');
   const rawScene = Number.parseInt(params.get('b') || '0', 10);
   const scene = Number.isFinite(rawScene) ? Math.min(7, Math.max(0, rawScene)) : 0;
@@ -34,6 +35,9 @@ import Hero from './Hero.astro';
   if (giftMessage) giftMessage.textContent = message;
   if (giftMessageTyped) giftMessageTyped.textContent = message;
   if (giftFrom) giftFrom.textContent = from;
+  if (giftCopy) {
+    giftCopy.dataset.messageLength = message.length <= 30 ? 'short' : message.length <= 65 ? 'medium' : 'long';
+  }
   if (reminderCard) reminderCard.className = `reminder-card scene-${scene}`;
   document.documentElement.lang = 'en';
 

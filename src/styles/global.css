@@ -872,6 +872,14 @@ h2 {
   text-wrap: balance;
 }
 
+.hero-gift-copy[data-message-length='short'] blockquote {
+  font-size: clamp(2.9rem, 13.2vw, 4.7rem);
+}
+
+.hero-gift-copy[data-message-length='medium'] blockquote {
+  font-size: clamp(2.05rem, 8.4vw, 3.15rem);
+}
+
 .hero-gift-copy > span {
   margin-top: 10px;
   color: rgba(255, 255, 255, 0.92);
@@ -1128,6 +1136,14 @@ h2 {
 
   .hero-gift-copy blockquote {
     font-size: clamp(1.15rem, 5.2vw, 1.45rem);
+  }
+
+  .hero-gift-copy[data-message-length='short'] blockquote {
+    font-size: clamp(2.3rem, 10.4vw, 2.9rem);
+  }
+
+  .hero-gift-copy[data-message-length='medium'] blockquote {
+    font-size: clamp(1.65rem, 7.2vw, 2rem);
   }
 
   .hero-gift-copy > span {
