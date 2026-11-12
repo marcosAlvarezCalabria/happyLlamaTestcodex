@@ -1,41 +1,94 @@
 <section class="hero-stage scene-0" id="hero-stage" aria-labelledby="hero-title">
   <h1 class="sr-only" id="hero-title">Your Happy Llama keepsake</h1>
-  <div class="scene-depth scene-depth-back" aria-hidden="true"></div>
-  <div class="scene-depth scene-depth-front" aria-hidden="true"></div>
 
-  <button class="hero-llama" id="hero-llama" type="button" aria-label="Make the llama jump">
-    <img src="/assets/hero/llama.svg" alt="A cheerful illustrated llama" width="500" height="600" />
-    <span class="tap-hint"><span aria-hidden="true">☝️</span> Tap me!</span>
+  <button class="hero-video-trigger" id="hero-video-trigger" type="button" aria-label="Replay the Happy Llama animation">
+    <video
+      class="hero-video"
+      id="hero-video"
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="/assets/hero/happy-llama-hero-mobile-poster.webp"
+      aria-hidden="true"
+    >
+      <source
+        src="/assets/hero/happy-llama-hero-mobile.mp4"
+        type="video/mp4"
+        media="(max-width: 959px)"
+      />
+      <source
+        src="/assets/hero/happy-llama-hero-desktop.mp4"
+        type="video/mp4"
+        media="(min-width: 960px)"
+      />
+      <img
+        src="/assets/hero/happy-llama-hero-mobile-poster.webp"
+        alt="A Happy Llama keepsake travelling from Peru to Galway"
+        width="720"
+        height="900"
+      />
+    </video>
+    <span class="sr-only">Replay the eight-second Happy Llama journey</span>
   </button>
 
   <div class="spark-field" aria-hidden="true">
     <i>✦</i><i>♥</i><i>✦</i><i>★</i><i>♥</i><i>✦</i>
   </div>
-  <div class="scene-badge" aria-hidden="true"><span>Perú</span><i>→</i><span>Galway</span></div>
 </section>
 
 <script>
   const stage = document.querySelector<HTMLElement>('#hero-stage');
-  const llama = document.querySelector<HTMLButtonElement>('#hero-llama');
+  const trigger = document.querySelector<HTMLButtonElement>('#hero-video-trigger');
+  const video = document.querySelector<HTMLVideoElement>('#hero-video');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const desktopVideo = window.matchMedia('(min-width: 960px)');
   let celebrationTimer = 0;
+  let isInView = true;
 
-  const onHeroTap = () => {
+  const setPoster = () => {
+    if (!video) return;
+    video.poster = desktopVideo.matches
+      ? '/assets/hero/happy-llama-hero-desktop-poster.webp'
+      : '/assets/hero/happy-llama-hero-mobile-poster.webp';
+  };
+
+  const syncPlayback = () => {
+    if (!video) return;
+    if (reducedMotion.matches || document.hidden || !isInView) {
+      video.pause();
+      return;
+    }
+    void video.play().catch(() => stage?.classList.add('video-needs-play'));
+  };
+
+  const celebrate = () => {
     if (!stage) return;
     window.clearTimeout(celebrationTimer);
-    stage.classList.remove('is-celebrating');
+    stage.classList.remove('is-celebrating', 'video-needs-play');
     requestAnimationFrame(() => stage.classList.add('is-celebrating'));
     celebrationTimer = window.setTimeout(() => stage.classList.remove('is-celebrating'), 900);
   };
 
-  llama?.addEventListener('click', onHeroTap);
-  stage?.addEventListener('pointermove', (event) => {
-    if (event.pointerType === 'touch') return;
-    const box = stage.getBoundingClientRect();
-    stage.style.setProperty('--pointer-x', `${((event.clientX - box.left) / box.width - 0.5) * 10}px`);
-    stage.style.setProperty('--pointer-y', `${((event.clientY - box.top) / box.height - 0.5) * 8}px`);
+  trigger?.addEventListener('click', () => {
+    celebrate();
+    if (!video || reducedMotion.matches) return;
+    video.currentTime = 0;
+    void video.play();
   });
-  stage?.addEventListener('pointerleave', () => {
-    stage.style.setProperty('--pointer-x', '0px');
-    stage.style.setProperty('--pointer-y', '0px');
-  });
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      isInView = Boolean(entry?.isIntersecting);
+      syncPlayback();
+    },
+    { threshold: 0.15 },
+  );
+
+  if (stage) observer.observe(stage);
+  document.addEventListener('visibilitychange', syncPlayback);
+  reducedMotion.addEventListener('change', syncPlayback);
+  desktopVideo.addEventListener('change', setPoster);
+  setPoster();
+  syncPlayback();
 </script>

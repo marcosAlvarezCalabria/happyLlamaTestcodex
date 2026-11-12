@@ -7,6 +7,11 @@ const accessories = [
   { id: 'pendant', label: 'Pendant', icon: '💖', src: '/assets/accessories/pendant.svg' },
   { id: 'flowers', label: 'Flowers', icon: '🌸', src: '/assets/accessories/flowers.svg' },
 ];
+
+const llamas = [
+  { id: 'cream', label: 'Cream llama', src: '/assets/llama/cream.webp' },
+  { id: 'brown', label: 'Brown llama', src: '/assets/llama/brown.webp' },
+];
 ---
 
 <section class="dressup" aria-labelledby="dressup-title">
@@ -18,8 +23,31 @@ const accessories = [
     <p>Tap to add or remove</p>
   </div>
 
+  <div class="llama-picker" role="group" aria-label="Choose your llama">
+    {
+      llamas.map((llama, index) => (
+        <button
+          class="llama-choice-button"
+          type="button"
+          data-llama={llama.id}
+          aria-pressed={index === 0}
+        >
+          <img src={llama.src} alt="" width="72" height="72" />
+          <span>{llama.label}</span>
+        </button>
+      ))
+    }
+  </div>
+
   <div class="dressup-stage" id="dressup-stage" aria-live="polite">
-    <img class="dressup-base" src="/assets/llama/base.svg" alt="Your llama" width="500" height="600" />
+    <img
+      class="dressup-base"
+      id="dressup-base"
+      src="/assets/llama/cream.webp"
+      alt="Cream Happy Llama"
+      width="900"
+      height="900"
+    />
     {
       accessories.map((item) => (
         <img
@@ -51,6 +79,8 @@ const accessories = [
 
 <script>
   const dressupStage = document.querySelector<HTMLElement>('#dressup-stage');
+  const dressupBase = document.querySelector<HTMLImageElement>('#dressup-base');
+  const llamaButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-llama]'));
   const accessoryButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-toggle]'));
   const accessoryLayers = Array.from(document.querySelectorAll<HTMLImageElement>('[data-accessory]'));
   const dressupStatus = document.querySelector<HTMLElement>('#dressup-status');
@@ -58,15 +88,29 @@ const accessories = [
   const cardId = (query.get('id') || 'demo').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 24) || 'demo';
   const storageKey = `happy-llama-outfit:${cardId}`;
   let active = new Set<string>();
+  let selectedLlama = 'cream';
 
   try {
-    const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
-    if (Array.isArray(saved)) active = new Set(saved.filter((item) => typeof item === 'string'));
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    if (Array.isArray(saved)) {
+      active = new Set(saved.filter((item) => typeof item === 'string'));
+    } else if (saved && typeof saved === 'object') {
+      const savedAccessories = Array.isArray(saved.accessories) ? saved.accessories : [];
+      active = new Set(savedAccessories.filter((item: unknown) => typeof item === 'string'));
+      if (saved.llama === 'brown' || saved.llama === 'cream') selectedLlama = saved.llama;
+    }
   } catch {
     active = new Set();
   }
 
-  const renderOutfit = (changed?: string) => {
+  const renderOutfit = (changed?: string, llamaChanged = false) => {
+    if (dressupBase) {
+      dressupBase.src = `/assets/llama/${selectedLlama}.webp`;
+      dressupBase.alt = `${selectedLlama === 'brown' ? 'Brown' : 'Cream'} Happy Llama`;
+    }
+    llamaButtons.forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.llama === selectedLlama));
+    });
     accessoryLayers.forEach((layer) => {
       layer.hidden = !active.has(layer.dataset.accessory || '');
     });
@@ -74,18 +118,31 @@ const accessories = [
       button.setAttribute('aria-pressed', String(active.has(button.dataset.toggle || '')));
     });
     try {
-      localStorage.setItem(storageKey, JSON.stringify([...active]));
+      localStorage.setItem(storageKey, JSON.stringify({ accessories: [...active], llama: selectedLlama }));
     } catch {}
 
-    if (changed && dressupStage) {
+    if ((changed || llamaChanged) && dressupStage) {
       dressupStage.classList.remove('is-booping');
       requestAnimationFrame(() => dressupStage.classList.add('is-booping'));
       window.setTimeout(() => dressupStage.classList.remove('is-booping'), 500);
-      const button = accessoryButtons.find((item) => item.dataset.toggle === changed);
-      const label = button?.textContent?.trim() || changed;
-      if (dressupStatus) dressupStatus.textContent = `${label} ${active.has(changed) ? 'added' : 'removed'}.`;
+      if (changed) {
+        const button = accessoryButtons.find((item) => item.dataset.toggle === changed);
+        const label = button?.textContent?.trim() || changed;
+        if (dressupStatus) dressupStatus.textContent = `${label} ${active.has(changed) ? 'added' : 'removed'}.`;
+      } else if (dressupStatus) {
+        dressupStatus.textContent = `${selectedLlama === 'brown' ? 'Brown' : 'Cream'} llama selected.`;
+      }
     }
   };
+
+  llamaButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const llama = button.dataset.llama;
+      if (llama !== 'brown' && llama !== 'cream') return;
+      selectedLlama = llama;
+      renderOutfit(undefined, true);
+    });
+  });
 
   accessoryButtons.forEach((button) => {
     button.addEventListener('click', () => {

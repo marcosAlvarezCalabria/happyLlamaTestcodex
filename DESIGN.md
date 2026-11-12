@@ -2,7 +2,7 @@
 
 ## Visual thesis
 
-The interface behaves like a small retablo-inspired keepsake that opens into a vivid Galway–Peru scene. It is playful and handcrafted without pretending that placeholder illustration is real product photography.
+The interface behaves like a small retablo-inspired keepsake that opens into supplied Galway–Peru photography. It is playful and handcrafted while keeping the product images recognisable and unretouched.
 
 ## Colour system
 

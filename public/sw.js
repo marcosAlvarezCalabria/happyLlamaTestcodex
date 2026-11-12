@@ -1,16 +1,21 @@
-const CACHE = 'happy-llama-keepsake-v1';
+const CACHE = 'happy-llama-keepsake-v3';
 const CORE = [
   '/',
   '/assets/brand/happy-llama-logo.png',
   '/assets/brand/favicon.svg',
   '/assets/hero/llama.svg',
-  '/assets/llama/base.svg',
-  '/assets/scenes/galway-market.svg',
-  '/assets/scenes/cusco.svg',
-  '/assets/scenes/machu-picchu.svg',
-  '/assets/scenes/andes.svg',
-  '/assets/scenes/irish-coast.svg',
-  '/assets/scenes/warm-weave.svg',
+  '/assets/hero/happy-llama-hero-mobile-poster.webp',
+  '/assets/hero/happy-llama-hero-desktop-poster.webp',
+  '/assets/llama/cream.webp',
+  '/assets/llama/brown.webp',
+  '/assets/scenes/galway.webp',
+  '/assets/scenes/cusco.webp',
+  '/assets/scenes/machupicchu.webp',
+  '/assets/scenes/andes.webp',
+  '/assets/scenes/moher.webp',
+  '/assets/scenes/causeway.webp',
+  '/assets/scenes/dublin.webp',
+  '/assets/scenes/rainbow.webp',
   '/assets/accessories/hat.svg',
   '/assets/accessories/glasses.svg',
   '/assets/accessories/scarf.svg',
@@ -33,6 +38,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  if (event.request.headers.has('range')) return;
   if (event.request.mode === 'navigate') {
     event.respondWith(fetch(event.request).catch(() => caches.match('/')));
     return;

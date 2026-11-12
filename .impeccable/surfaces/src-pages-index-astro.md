@@ -15,12 +15,12 @@ The Happy Llama owner must create an NFC-ready keepsake URL quickly on a phone. 
 
 ## Content and constraints
 
-Message, optional signature, and one of six scenes are the only creator inputs. The viewer is English; the creator is Spanish. Preserve static Astro output, URL-carried content, local-only outfit persistence, privacy, 44px targets, and low-end mobile performance.
+Message, optional signature, and one of eight supplied scenes are the only creator inputs. The viewer is English; the creator is Spanish. Preserve static Astro output, URL-carried content, local-only llama/outfit persistence, privacy, 44px targets, and low-end mobile performance.
 
 ## Direction and memorable moment
 
 A vivid pocket-retablo keepsake joins Peru and Galway. The signature moment is the llama's joyful tap reaction, followed by accessory layers that remain dressed when the same card returns.
 
-## Unresolved production assets
+## Production assets
 
-Replace the illustrated llama, scene, and accessory placeholders with supplied real cut-out photography and aligned transparent layers before production launch.
+The supplied scene and llama photographs are in use. Accessory layers remain local SVGs and should be replaced with photographically aligned transparent layers if the product catalogue provides them later.

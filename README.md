@@ -28,20 +28,18 @@ The `dist/` folder can be dragged into Netlify Drop. There are no server functio
 
 - `/` opens the creator.
 - `/?id=abc12&t=Hello&b=0&f=With%20love` opens the viewer.
-- `t` is the message, `f` the optional sign-off, and `b` the scene from 0 to 5.
-- The selected outfit is stored in the browser under `happy-llama-outfit:<id>` and never leaves the device.
+- `t` is the message, `f` the optional sign-off, and `b` the scene from 0 to 7.
+- The selected llama colour and outfit are stored in the browser under `happy-llama-outfit:<id>` and never leave the device.
 
-## Replace the demo artwork
+## Artwork
 
-The current llama and scenes are illustrated placeholders. Do not present them as real product photography.
-
-- Hero image: replace `public/assets/hero/llama.svg` with the real cut-out while keeping the same filename, or update the path in `Hero.astro`.
-- Dress-up base: replace `public/assets/llama/base.svg`.
-- Scenes: replace the six files in `public/assets/scenes/` while keeping their filenames.
+- Hero video: responsive mobile and desktop MP4 files live in `public/assets/hero/`, with WebP posters used when motion is reduced.
+- Dress-up bases: `public/assets/llama/cream.webp` and `public/assets/llama/brown.webp` come from the supplied product images.
+- Scenes: the eight supplied photographs live in `public/assets/scenes/` as WebP files.
 - Accessories: replace the aligned layers in `public/assets/accessories/`. Each layer uses the same 500 × 600 canvas as the base llama.
 - Logo: `public/assets/brand/happy-llama-logo.png` is the supplied company logo.
 
-For production, the real llama photograph and every accessory PNG should be exported to exactly the same transparent canvas so the layers stay aligned.
+For a future accessory-photo refresh, export every layer to one shared transparent canvas so it stays aligned with both llama poses.
 
 ## Privacy and offline behaviour
 

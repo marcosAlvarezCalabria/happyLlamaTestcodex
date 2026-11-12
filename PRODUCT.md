@@ -21,16 +21,16 @@ The keepsake is carried entirely by one NFC-safe URL; the recipient's outfit is 
 
 ## Operating Context
 
-The seller writes a short message, optional sign-off, and chooses one of six scenes. The generated URL is written to the llama's NFC pendant with NFC Tools. A recipient later opens that URL in a default iPhone or Android browser.
+The seller writes a short message, optional sign-off, and chooses one of eight supplied scenes. The generated URL is written to the llama's NFC pendant with NFC Tools. A recipient later opens that URL in a default iPhone or Android browser.
 
 ## Capabilities and Constraints
 
 - Static Astro output for Netlify; no SSR, functions, database, login, analytics, chat, location, or checkout.
 - Creator and viewer share the root URL and are selected from query parameters.
-- Message and scene travel in the URL. Outfit state persists in `localStorage` using the card ID.
+- Message and one of eight supplied Ireland/Peru scenes travel in the URL. Llama colour and outfit state persist in `localStorage` using the card ID.
 - Mobile-first, narrow-screen and low-end Android support; 44px minimum touch targets and reduced-motion support.
 - Viewer language is English. Creator language is Spanish.
-- Real transparent llama photography and generated Galway/Peru scenes are not supplied yet; the build must work with clearly replaceable local placeholders.
+- Supplied Galway/Peru photography and cream/brown llama product photos are used as local assets; accessory layers remain independently replaceable.
 
 ## Brand Commitments
 
@@ -41,7 +41,7 @@ The product is Happy Llama: warm, handcrafted, playful, gift-oriented, and never
 - Product specification: `C:\Users\Marcos\Downloads\spec-hl-004.md`.
 - Supplied logo: `C:\Users\Marcos\AppData\Local\Temp\codex-clipboard-2fa52394-64cf-4f43-b15e-7953bb6962fc.png`.
 - Official site: `https://www.happyllama.ie/`; its current catalogue confirms llama hats, sunglasses, glasses, and headphones.
-- No real cut-out llama image, fitted accessory layers, testimonial, metric, or final scene image was supplied for this build. Future work must not present placeholders as product photography.
+- The supplied ZIP provides eight scene photographs and two llama product photographs. No testimonial, metric, or newly claimed product result is introduced.
 
 ## Product Principles
 

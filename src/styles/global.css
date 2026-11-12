@@ -10,7 +10,7 @@
   --violet: #7456c9;
   --line: #31233b;
   --shadow: 0 16px 38px rgba(63, 35, 71, 0.16), 0 4px 0 rgba(63, 35, 71, 0.08);
-  --scene-image: url('/assets/scenes/galway-market.svg');
+  --scene-image: url('/assets/scenes/galway.webp');
   color-scheme: light;
   font-family: 'Nunito Variable', 'Nunito', ui-rounded, system-ui, sans-serif;
   background: var(--paper);
@@ -137,8 +137,7 @@ img {
   gap: 20px;
 }
 
-.header-note,
-.tiny-keepsake {
+.header-note {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -486,9 +485,20 @@ h2 {
   position: absolute;
   top: 4%;
   left: 50%;
-  width: 66%;
+  width: 70%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.82);
+  border-radius: 48% 48% 24px 24px;
+  background: var(--paper);
   transform: translateX(-50%);
-  filter: drop-shadow(0 10px 14px rgba(37, 20, 40, 0.28));
+  box-shadow: 0 12px 24px rgba(37, 20, 40, 0.28);
+}
+
+.preview-llama img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .preview-message {
@@ -556,122 +566,59 @@ h2 {
 }
 
 .viewer-header {
-  position: absolute;
+  position: relative;
   z-index: 20;
-  top: max(10px, env(safe-area-inset-top));
-  left: 50%;
   width: min(100% - 28px, 740px);
-  transform: translateX(-50%);
-}
-
-.tiny-keepsake {
-  min-height: 32px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  padding: 5px 11px;
-  box-shadow: 0 3px 0 rgba(42, 34, 48, 0.1);
+  margin: 0 auto;
+  padding-block: max(10px, env(safe-area-inset-top)) 10px;
 }
 
 .hero-stage {
-  --pointer-x: 0px;
-  --pointer-y: 0px;
   position: relative;
-  display: grid;
-  place-items: end center;
-  min-height: min(720px, 82svh);
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: var(--scene-image) center / cover no-repeat;
+  background: #f8e5df url('/assets/hero/happy-llama-hero-mobile-poster.webp') center / cover no-repeat;
   isolation: isolate;
 }
 
-.hero-stage::after {
-  content: '';
+.hero-video-trigger {
   position: absolute;
-  inset: auto 0 0;
-  height: 31%;
-  z-index: -1;
-  background: linear-gradient(transparent, rgba(34, 24, 38, 0.4));
-}
-
-.scene-depth {
-  position: absolute;
-  inset: -15px;
-  pointer-events: none;
-  transition: transform 300ms ease-out;
-}
-
-.scene-depth-back {
-  z-index: -2;
-  transform: translate(calc(var(--pointer-x) * -0.45), calc(var(--pointer-y) * -0.45));
-}
-
-.scene-depth-front {
-  z-index: 2;
-  inset: auto -10% -7%;
-  height: 27%;
-  opacity: 0.88;
-  background: url('/assets/decor/foreground.svg') center bottom / cover no-repeat;
-  transform: translate(var(--pointer-x), var(--pointer-y));
-}
-
-.hero-llama {
-  position: relative;
+  inset: 0;
   z-index: 1;
-  width: min(76vw, 430px);
-  min-height: 44px;
-  margin: 0 0 2vh;
+  width: 100%;
+  min-height: 100%;
   border: 0;
-  background: transparent;
+  border-radius: 0;
+  background: #f8e5df;
   padding: 0;
-  filter: drop-shadow(0 20px 20px rgba(30, 16, 34, 0.3));
   cursor: pointer;
-  transform-origin: center 86%;
-  animation: llama-sway 4.8s ease-in-out infinite;
+  transform-origin: center;
 }
 
-.hero-llama img {
+.hero-video-trigger:focus-visible {
+  outline: 4px solid var(--pink-dark);
+  outline-offset: -7px;
+}
+
+.hero-video {
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.tap-hint {
+.video-needs-play .hero-video-trigger::after {
+  content: 'Tap to play';
   position: absolute;
-  right: -4%;
-  top: 48%;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  border: 2px solid var(--ink);
+  right: 18px;
+  bottom: 18px;
   border-radius: 999px;
-  background: var(--butter);
-  color: var(--ink);
-  padding: 7px 10px;
-  box-shadow: 0 4px 0 var(--ink);
-  font-size: 0.8rem;
-  font-weight: 900;
-  transform: rotate(5deg);
-}
-
-.scene-badge {
-  position: absolute;
-  z-index: 4;
-  left: 14px;
-  bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  border-radius: 999px;
-  background: rgba(42, 34, 48, 0.82);
+  background: var(--pink);
   color: #fff;
-  padding: 7px 11px;
-  font-size: 0.72rem;
+  padding: 9px 14px;
+  box-shadow: 0 5px 0 var(--pink-dark);
+  font-size: 0.82rem;
   font-weight: 900;
-  backdrop-filter: blur(4px);
-}
-
-.scene-badge i {
-  color: var(--butter);
-  font-style: normal;
 }
 
 .spark-field {
@@ -697,7 +644,7 @@ h2 {
 .spark-field i:nth-child(4) { color: var(--coral); }
 .spark-field i:nth-child(5) { color: var(--pink); }
 
-.is-celebrating .hero-llama {
+.is-celebrating .hero-video-trigger {
   animation: llama-hop 820ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -711,11 +658,6 @@ h2 {
 .is-celebrating .spark-field i:nth-child(4) { --spark-x: 145px; --spark-y: -5px; animation-delay: 20ms; }
 .is-celebrating .spark-field i:nth-child(5) { --spark-x: -90px; --spark-y: 90px; animation-delay: 110ms; }
 .is-celebrating .spark-field i:nth-child(6) { --spark-x: 105px; --spark-y: 95px; animation-delay: 70ms; }
-
-@keyframes llama-sway {
-  0%, 100% { transform: rotate(-1.5deg) translateY(0); }
-  50% { transform: rotate(1.5deg) translateY(-5px); }
-}
 
 @keyframes llama-hop {
   0% { transform: translateY(0) rotate(0); }
@@ -781,6 +723,7 @@ h2 {
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.02;
+  overflow-wrap: anywhere;
 }
 
 .message-content span {
@@ -832,6 +775,54 @@ h2 {
   text-align: right;
 }
 
+.llama-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: min(100%, 480px);
+  margin: 0 auto 14px;
+}
+
+.llama-choice-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 68px;
+  border: 3px solid rgba(42, 34, 48, 0.18);
+  border-radius: 14px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 5px 10px 5px 5px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 850;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.llama-choice-button img {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.llama-choice-button span {
+  min-width: 0;
+}
+
+.llama-choice-button:hover {
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+
+.llama-choice-button[aria-pressed='true'] {
+  border-color: var(--ink);
+  box-shadow: 0 4px 0 var(--pink);
+}
+
 .dressup-stage {
   position: relative;
   width: min(100%, 480px);
@@ -846,15 +837,6 @@ h2 {
   box-shadow: var(--shadow), 0 8px 0 var(--leaf);
 }
 
-.dressup-stage::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 19%;
-  background: url('/assets/decor/foreground.svg') bottom center / cover no-repeat;
-  pointer-events: none;
-}
-
 .dressup-base,
 .accessory-layer {
   position: absolute;
@@ -863,6 +845,14 @@ h2 {
   height: 100%;
   object-fit: contain;
   pointer-events: none;
+}
+
+.dressup-base {
+  object-fit: cover;
+}
+
+.accessory-layer {
+  object-fit: contain;
 }
 
 .accessory-layer[hidden] {
@@ -969,12 +959,14 @@ h2 {
   font-weight: 900;
 }
 
-.scene-0 { --scene-image: url('/assets/scenes/galway-market.svg'); }
-.scene-1 { --scene-image: url('/assets/scenes/cusco.svg'); }
-.scene-2 { --scene-image: url('/assets/scenes/machu-picchu.svg'); }
-.scene-3 { --scene-image: url('/assets/scenes/andes.svg'); }
-.scene-4 { --scene-image: url('/assets/scenes/irish-coast.svg'); }
-.scene-5 { --scene-image: url('/assets/scenes/warm-weave.svg'); }
+.scene-0 { --scene-image: url('/assets/scenes/galway.webp'); }
+.scene-1 { --scene-image: url('/assets/scenes/cusco.webp'); }
+.scene-2 { --scene-image: url('/assets/scenes/machupicchu.webp'); }
+.scene-3 { --scene-image: url('/assets/scenes/andes.webp'); }
+.scene-4 { --scene-image: url('/assets/scenes/moher.webp'); }
+.scene-5 { --scene-image: url('/assets/scenes/causeway.webp'); }
+.scene-6 { --scene-image: url('/assets/scenes/dublin.webp'); }
+.scene-7 { --scene-image: url('/assets/scenes/rainbow.webp'); }
 
 @media (min-width: 780px) {
   .creator-grid {
@@ -985,7 +977,7 @@ h2 {
   }
 
   .scene-picker {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .scene-swatch {
@@ -994,10 +986,6 @@ h2 {
 
   .keepsake-card {
     min-height: 590px;
-  }
-
-  .hero-stage {
-    min-height: 760px;
   }
 
   .message-wrap {
@@ -1029,6 +1017,10 @@ h2 {
     font-size: 0.72rem;
   }
 
+  .message-content blockquote {
+    font-size: clamp(1.75rem, 7.4vw, 2.2rem);
+  }
+
   .creator-footer {
     align-items: flex-start;
     flex-direction: column;
@@ -1039,16 +1031,13 @@ h2 {
     min-height: 515px;
   }
 
+}
+
+@media (min-width: 960px) {
   .hero-stage {
-    min-height: 670px;
-  }
-
-  .hero-llama {
-    width: min(88vw, 390px);
-  }
-
-  .tap-hint {
-    right: 1%;
+    aspect-ratio: 16 / 9;
+    max-height: 760px;
+    background-image: url('/assets/hero/happy-llama-hero-desktop-poster.webp');
   }
 }
 
@@ -1066,7 +1055,7 @@ h2 {
     transition-duration: 0.01ms !important;
   }
 
-  .hero-llama {
+  .hero-video-trigger {
     animation: none;
   }
 }
