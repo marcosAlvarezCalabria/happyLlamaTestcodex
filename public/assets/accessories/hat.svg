@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600">
-  <g stroke="#2a2230" stroke-width="7" stroke-linejoin="round">
-    <path d="M219 133c7-47 30-75 70-75 42 0 66 29 69 76-44-18-91-18-139-1Z" fill="#ff0088"/>
-    <path d="M213 133c42-18 101-18 152 2l-10 32c-42-13-88-14-135-1Z" fill="#fff5a8"/>
-    <circle cx="289" cy="51" r="18" fill="#4fbf84"/>
-  </g>
-</svg>

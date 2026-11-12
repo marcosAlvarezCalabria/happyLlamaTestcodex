@@ -18,16 +18,16 @@ const scenes = [
     <BrandMark />
     <div class="header-note">
       <span class="nfc-dot" aria-hidden="true"></span>
-      Recuerdo NFC
+      Recordatorio NFC
     </div>
   </header>
 
   <div class="creator-grid page-width">
     <section class="creator-copy" aria-labelledby="creator-title">
       <p class="kicker">De Galway, con cariño</p>
-      <h1 id="creator-title">Crea un recuerdo que viaja con su llama.</h1>
+      <h1 id="creator-title">Crea un recordatorio que viaja con su llama.</h1>
       <p class="intro">
-        Escribe una dedicatoria, elige la escena y copia el enlace que grabarás en el colgante.
+        Escribe unas palabras, elige el lugar y copia el enlace que grabarás en el colgante.
       </p>
 
       <form class="keepsake-form" id="keepsake-form" novalidate>
@@ -44,7 +44,7 @@ const scenes = [
               aria-hidden="true"
             />
             <div class="mobile-preview-message">
-              <p>A keepsake from Galway</p>
+              <p>A little reminder from Galway</p>
               <blockquote data-preview-message>I was in Galway and thought of you 🦙</blockquote>
               <span data-preview-from>With love, Happy Llama</span>
             </div>
@@ -62,7 +62,7 @@ const scenes = [
           rows="4"
           placeholder="I was in Galway and thought of you 🦙"
           required></textarea>
-        <p class="field-error" id="message-error" hidden>Escribe primero un mensaje para el recuerdo.</p>
+        <p class="field-error" id="message-error" hidden>Escribe primero el mensaje del recordatorio.</p>
 
         <label for="from">De parte de <span class="optional">opcional</span></label>
         <input id="from" name="from" type="text" maxlength="60" placeholder="With love, María" />
@@ -99,7 +99,7 @@ const scenes = [
       </form>
     </section>
 
-    <aside class="preview-zone" aria-label="Vista previa del recuerdo">
+    <aside class="preview-zone" aria-label="Vista previa del recordatorio">
       <div class="preview-label"><span></span> Vista previa en vivo</div>
       <div class="keepsake-card scene-0" data-live-preview>
         <div class="preview-scene" aria-hidden="true"></div>
@@ -107,7 +107,7 @@ const scenes = [
           <img src="/assets/llama/cream-cutout.webp" alt="" width="1254" height="1254" />
         </div>
         <div class="preview-message">
-          <p>A keepsake from Galway</p>
+          <p>A little reminder from Galway</p>
           <blockquote data-preview-message>I was in Galway and thought of you 🦙</blockquote>
           <span data-preview-from>With love, Happy Llama</span>
         </div>
@@ -183,6 +183,20 @@ const scenes = [
 
   form?.addEventListener('input', updatePreview);
   form?.addEventListener('change', updatePreview);
+
+  const isTextField = (target: EventTarget | null) =>
+    target instanceof HTMLTextAreaElement ||
+    (target instanceof HTMLInputElement && target.type === 'text');
+
+  form?.addEventListener('focusin', (event) => {
+    if (isTextField(event.target)) form.classList.add('is-typing');
+  });
+
+  form?.addEventListener('focusout', () => {
+    window.setTimeout(() => {
+      if (!isTextField(document.activeElement)) form?.classList.remove('is-typing');
+    }, 0);
+  });
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();

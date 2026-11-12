@@ -8,16 +8,16 @@ web
 
 ## Users
 
-- The Happy Llama owner creates a keepsake link on a phone at a market stall or after an online sale.
-- The recipient, often a child or family member outside Ireland, opens the keepsake in a mobile browser by tapping an NFC tag.
+- The Happy Llama owner creates a reminder link on a phone at a market stall or after an online sale.
+- The recipient, often a child or family member outside Ireland, opens the reminder in a mobile browser by tapping an NFC tag.
 
 ## Product Purpose
 
-Create a personal, lightweight digital memory that travels with a physical Happy Llama: a message, a Galway–Peru scene, and a llama the recipient can dress up. Success means the seller can create a valid link in moments and the recipient can enjoy it without installing an app.
+Create a personal, lightweight digital reminder that travels with a physical Happy Llama: one message, one Galway–Peru scene, and the short Happy Llama film. Success means the seller can create a valid link in moments and the recipient can feel the message immediately without navigating a website or installing an app.
 
 ## Positioning
 
-The keepsake is carried entirely by one NFC-safe URL; the recipient's outfit is stored only on that device and for that card. There is no account, server, database, adoption flow, or in-experience shopping.
+The reminder is carried entirely by one NFC-safe URL. There is no account, server, database, adoption flow, personalisation game, or in-experience shopping.
 
 ## Operating Context
 
@@ -27,10 +27,10 @@ The seller writes a short message, optional sign-off, and chooses one of eight s
 
 - Static Astro output for Netlify; no SSR, functions, database, login, analytics, chat, location, or checkout.
 - Creator and viewer share the root URL and are selected from query parameters.
-- Message and one of eight supplied Ireland/Peru scenes travel in the URL. Llama colour and outfit state persist in `localStorage` using the card ID.
+- Message and one of eight supplied Ireland/Peru scenes travel in the URL.
 - Mobile-first, narrow-screen and low-end Android support; 44px minimum touch targets and reduced-motion support.
 - Viewer language is English. Creator language is Spanish.
-- Supplied Galway/Peru photography and transparent cream/brown llama cutouts derived from the supplied photos are used as local assets; accessory layers remain independently replaceable.
+- Supplied Galway/Peru photography, the Happy Llama film, and a transparent cream llama cutout derived from the supplied photo are used as local assets.
 
 ## Brand Commitments
 
@@ -45,10 +45,10 @@ The product is Happy Llama: warm, handcrafted, playful, gift-oriented, and never
 
 ## Product Principles
 
-- One joyful tap from physical keepsake to personal memory.
+- One joyful tap from physical llama to personal reminder.
 - Keep creation fast enough for a busy market stall.
-- Let the recipient play without collecting data or requiring an account.
-- Make every media layer replaceable without changing application logic.
+- Keep the recipient focused on the message without collecting data or requiring an account.
+- Make every media asset replaceable without changing application logic.
 - Prefer lightweight, resilient browser features over dependencies.
 
 ## Accessibility & Inclusion

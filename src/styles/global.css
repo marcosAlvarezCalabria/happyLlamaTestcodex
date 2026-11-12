@@ -129,8 +129,7 @@ img {
   transform: rotate(180deg);
 }
 
-.creator-header,
-.viewer-header {
+.creator-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -630,8 +629,7 @@ h2 {
   pointer-events: none;
 }
 
-.creator-footer,
-.viewer-footer {
+.creator-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -643,8 +641,8 @@ h2 {
 
 .viewer-shell {
   display: none;
-  overflow: hidden;
-  background: #fff8e4;
+  min-height: 100dvh;
+  background: var(--ink);
 }
 
 .viewer-mode .creator-shell {
@@ -652,22 +650,86 @@ h2 {
 }
 
 .viewer-mode .viewer-shell {
-  display: block;
+  display: grid;
+  place-items: center;
 }
 
-.viewer-header {
+.reminder-card {
   position: relative;
-  z-index: 20;
-  width: min(100% - 28px, 740px);
-  margin: 0 auto;
-  padding-block: max(10px, env(safe-area-inset-top)) 10px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: min(100%, 760px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--scene-image) center / cover no-repeat;
+  isolation: isolate;
+}
+
+.reminder-card::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(31, 18, 35, 0.36) 0 23%, rgba(31, 18, 35, 0.72) 65%, rgba(31, 18, 35, 0.94) 100%),
+    linear-gradient(110deg, rgba(255, 0, 136, 0.12), transparent 42%);
+}
+
+.reminder-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: max(12px, env(safe-area-inset-top)) 16px 10px;
+}
+
+.reminder-header .brand-mark {
+  border-radius: 12px;
+  background: rgba(255, 253, 247, 0.94);
+  padding: 3px 8px;
+  box-shadow: 0 4px 0 rgba(42, 34, 48, 0.22);
+}
+
+.reminder-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 850;
+  text-align: right;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.55);
+}
+
+.reminder-label span {
+  color: var(--pink);
+  font-size: 1rem;
+}
+
+.reminder-body {
+  display: grid;
+  align-content: center;
+  gap: clamp(20px, 4dvh, 34px);
+  min-height: 0;
+  padding: 10px 16px 18px;
+}
+
+.reminder-media {
+  width: min(100%, 520px);
+  margin-inline: auto;
 }
 
 .hero-stage {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  border: 4px solid var(--ink);
+  border-radius: 18px;
   background: #f8e5df url('/assets/hero/happy-llama-hero-mobile-poster.webp') center / cover no-repeat;
+  box-shadow: 0 7px 0 var(--pink), 0 18px 30px rgba(22, 10, 26, 0.26);
   isolation: isolate;
 }
 
@@ -678,7 +740,7 @@ h2 {
   width: 100%;
   min-height: 100%;
   border: 0;
-  border-radius: 0;
+  border-radius: 14px;
   background: #f8e5df;
   padding: 0;
   cursor: pointer;
@@ -698,7 +760,7 @@ h2 {
 }
 
 .video-needs-play .hero-video-trigger::after {
-  content: 'Tap to play';
+  content: 'Tap to replay';
   position: absolute;
   right: 18px;
   bottom: 18px;
@@ -763,290 +825,53 @@ h2 {
   100% { opacity: 0; transform: translate(calc(-50% + var(--spark-x)), calc(-50% + var(--spark-y))) scale(1.2) rotate(140deg); }
 }
 
-.message-wrap {
-  position: relative;
-  z-index: 7;
-  width: min(100% - 28px, 720px);
-  margin: -20px auto 0;
-}
-
-.message-card {
-  position: relative;
-  min-height: 330px;
-  overflow: hidden;
-  border: 6px solid var(--ink);
-  border-radius: 28px;
-  background: var(--scene-image) center / cover no-repeat;
-  box-shadow: var(--shadow), 0 9px 0 var(--pink);
-  isolation: isolate;
-}
-
-.message-card-scene {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(115deg, rgba(31, 18, 35, 0.92) 5%, rgba(31, 18, 35, 0.66) 62%, rgba(31, 18, 35, 0.18));
-}
-
-.message-content {
+.reminder-message {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 330px;
-  max-width: 590px;
+  width: min(100%, 620px);
+  min-height: 190px;
+  margin-inline: auto;
   color: #fff;
-  padding: 42px 28px 48px;
+  padding: 0 6px;
+  text-align: center;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.62);
 }
 
-.message-content p {
-  margin: 0 0 12px;
+.reminder-message p {
+  margin: 0 0 10px;
   color: var(--butter);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 900;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-.message-content blockquote {
+.reminder-message blockquote {
   margin: 0;
-  font-size: clamp(1.95rem, 8.2vw, 4rem);
+  font-size: clamp(1.9rem, 8vw, 3.75rem);
   font-weight: 900;
   letter-spacing: -0.03em;
-  line-height: 1.02;
+  line-height: 1.04;
   overflow-wrap: anywhere;
 }
 
-.message-content span {
-  margin-top: 21px;
+.reminder-message span {
+  margin-top: 16px;
   color: #fff6cd;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
 }
 
-.message-seal {
-  position: absolute;
-  right: 16px;
-  bottom: 15px;
-  display: grid;
-  place-items: center;
-  width: 50px;
-  height: 50px;
-  border: 2px solid var(--ink);
-  border-radius: 50%;
-  background: var(--butter);
-  box-shadow: 0 4px 0 var(--ink);
-  transform: rotate(-8deg);
-}
-
-.dressup {
-  width: min(100% - 28px, 760px);
-  margin: 86px auto 0;
-  padding-bottom: 72px;
-}
-
-.dressup-heading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-
-.dressup-heading h2 {
-  font-size: clamp(2.15rem, 9vw, 4.2rem);
-}
-
-.dressup-heading > p {
-  max-width: 90px;
-  margin: 0 0 3px;
-  color: #6f5d72;
-  font-size: 0.8rem;
-  font-weight: 800;
-  text-align: right;
-}
-
-.llama-picker {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  width: min(100%, 480px);
-  margin: 0 auto 14px;
-}
-
-.llama-choice-button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 68px;
-  border: 3px solid rgba(42, 34, 48, 0.18);
-  border-radius: 14px;
-  background: var(--paper);
-  color: var(--ink);
-  padding: 5px 10px 5px 5px;
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 850;
-  text-align: left;
-  cursor: pointer;
-  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
-}
-
-.llama-choice-button img {
-  width: 54px;
-  height: 54px;
-  flex: 0 0 auto;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.llama-choice-button span {
-  min-width: 0;
-}
-
-.llama-choice-button:hover {
-  border-color: var(--pink);
-  transform: translateY(-2px);
-}
-
-.llama-choice-button[aria-pressed='true'] {
-  border-color: var(--ink);
-  box-shadow: 0 4px 0 var(--pink);
-}
-
-.dressup-stage {
+.reminder-origin {
   position: relative;
-  width: min(100%, 480px);
-  aspect-ratio: 5 / 6;
-  margin-inline: auto;
-  overflow: hidden;
-  border: 4px solid var(--ink);
-  border-radius: 42% 42% 26px 26px;
-  background:
-    radial-gradient(circle at 50% 18%, rgba(255,255,255,0.82) 0 16%, transparent 16.5%),
-    linear-gradient(155deg, var(--sky), #e8fbff 58%, var(--butter));
-  box-shadow: var(--shadow), 0 8px 0 var(--leaf);
-}
-
-.dressup-base,
-.accessory-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.dressup-base {
-  object-fit: contain;
-}
-
-.accessory-layer {
-  object-fit: contain;
-}
-
-.accessory-layer[hidden] {
-  display: none;
-}
-
-.boop {
-  position: absolute;
-  z-index: 12;
-  right: 14%;
-  top: 18%;
-  color: var(--pink-dark);
-  font-size: 1.2rem;
-  font-weight: 900;
-  opacity: 0;
-  transform: rotate(8deg) scale(0.5);
-}
-
-.is-booping .dressup-base,
-.is-booping .accessory-layer:not([hidden]) {
-  animation: outfit-boop 430ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.is-booping .boop {
-  animation: boop-label 430ms ease-out;
-}
-
-@keyframes outfit-boop {
-  0% { transform: scale(1); }
-  45% { transform: scale(1.045) rotate(-1deg); }
-  100% { transform: scale(1); }
-}
-
-@keyframes boop-label {
-  0% { opacity: 0; transform: rotate(8deg) translateY(10px) scale(0.5); }
-  35% { opacity: 1; }
-  100% { opacity: 0; transform: rotate(8deg) translateY(-24px) scale(1.1); }
-}
-
-.accessory-rail {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 82px;
-  gap: 10px;
-  margin: 22px -14px 0;
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding: 5px 14px 12px;
-}
-
-.accessory-rail::-webkit-scrollbar {
-  display: none;
-}
-
-.accessory-button {
-  display: grid;
-  place-items: center;
-  gap: 4px;
-  min-height: 82px;
-  scroll-snap-align: start;
-  border: 2px solid rgba(42, 34, 48, 0.24);
-  border-radius: 14px;
-  background: #fff;
-  color: var(--ink);
-  box-shadow: 0 4px 0 rgba(42, 34, 48, 0.12);
-  padding: 7px 5px;
-  font-size: 0.7rem;
-  font-weight: 850;
-  cursor: pointer;
-  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
-}
-
-.accessory-button:hover {
-  transform: translateY(-2px);
-  border-color: var(--pink);
-}
-
-.accessory-button[aria-pressed='true'] {
-  border-color: var(--ink);
-  background: var(--pink);
-  color: #fff;
-  box-shadow: 0 5px 0 var(--ink);
-  transform: translateY(-2px);
-}
-
-.accessory-icon {
-  font-size: 1.55rem;
-  line-height: 1;
-}
-
-.viewer-footer {
-  border-top: 2px dashed rgba(42, 34, 48, 0.22);
-  background: var(--paper);
-  padding: 24px max(18px, calc((100% - 760px) / 2)) max(28px, env(safe-area-inset-bottom));
-}
-
-.viewer-footer a {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  color: var(--pink-dark);
-  font-weight: 900;
+  z-index: 10;
+  padding: 10px 16px max(14px, env(safe-area-inset-bottom));
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .scene-0 { --scene-image: url('/assets/scenes/galway.webp'); }
@@ -1057,6 +882,50 @@ h2 {
 .scene-5 { --scene-image: url('/assets/scenes/causeway.webp'); }
 .scene-6 { --scene-image: url('/assets/scenes/dublin.webp'); }
 .scene-7 { --scene-image: url('/assets/scenes/rainbow.webp'); }
+
+@media (max-width: 779px) {
+  .keepsake-form.is-typing .mobile-live-preview {
+    margin-bottom: 2px;
+    padding-block: 4px 7px;
+  }
+
+  .keepsake-form.is-typing .mobile-preview-label {
+    display: none;
+  }
+
+  .keepsake-form.is-typing .mobile-preview-card {
+    min-height: 86px;
+    border-width: 3px;
+    border-radius: 13px;
+    box-shadow: 0 4px 0 var(--pink);
+  }
+
+  .keepsake-form.is-typing .mobile-preview-llama {
+    right: 3%;
+    bottom: -14%;
+    width: 29%;
+    height: 118%;
+  }
+
+  .keepsake-form.is-typing .mobile-preview-message {
+    inset: 9px auto auto 11px;
+    width: 72%;
+  }
+
+  .keepsake-form.is-typing .mobile-preview-message p,
+  .keepsake-form.is-typing .mobile-preview-message span {
+    display: none;
+  }
+
+  .keepsake-form.is-typing .mobile-preview-message blockquote {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.91rem;
+    line-height: 1.12;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
 
 @media (min-width: 780px) {
   .mobile-live-preview {
@@ -1086,14 +955,9 @@ h2 {
     min-height: 590px;
   }
 
-  .message-wrap {
-    margin-top: -40px;
-  }
-
-  .accessory-rail {
-    grid-auto-columns: 96px;
-    justify-content: center;
-    overflow: visible;
+  .reminder-card {
+    min-height: min(100dvh, 920px);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 28px 70px rgba(0, 0, 0, 0.32);
   }
 }
 
@@ -1115,7 +979,20 @@ h2 {
     font-size: 0.72rem;
   }
 
-  .message-content blockquote {
+  .reminder-header .brand-mark img {
+    width: 94px;
+  }
+
+  .reminder-label {
+    max-width: 145px;
+    font-size: 0.7rem;
+  }
+
+  .reminder-body {
+    gap: 20px;
+  }
+
+  .reminder-message blockquote {
     font-size: clamp(1.75rem, 7.4vw, 2.2rem);
   }
 
@@ -1134,7 +1011,6 @@ h2 {
 @media (min-width: 960px) {
   .hero-stage {
     aspect-ratio: 16 / 9;
-    max-height: 760px;
     background-image: url('/assets/hero/happy-llama-hero-desktop-poster.webp');
   }
 }

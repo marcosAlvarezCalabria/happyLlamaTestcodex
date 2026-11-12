@@ -1,8 +1,8 @@
-# Happy Llama Keepsake Design
+# Happy Llama Reminder Design
 
 ## Visual thesis
 
-The interface behaves like a small retablo-inspired keepsake that opens into supplied Galway–Peru photography. It is playful and handcrafted while keeping the supplied product identity recognisable in clean transparent cutouts.
+The interface behaves like one personal, retablo-inspired reminder rather than a website. It opens directly into the supplied Galway–Peru photography, the short film, and the recipient's message.
 
 ## Colour system
 
@@ -20,16 +20,16 @@ Nunito Variable is self-hosted through the build. Headings use 800–900; body a
 
 ## Shape and material
 
-The keepsake has a stepped, scalloped silhouette, saturated edge bands, offset shadows, stitched/dashed micro-details, and simple cut-paper scene layers. Controls are sturdy and tactile. Radii are 14–28px; pills are used only for small status labels and chips.
+The reminder is one full-height photographic piece with a framed moving memory, direct message typography, saturated edge accents, and offset shadows. Creator controls remain sturdy and tactile. Radii are 14–28px; pills are used only for small status labels.
 
 ## Composition
 
-Mobile is the primary canvas. The viewer opens with the interactive llama scene at near-viewport scale, followed by the message and dress-up rail. The creator keeps a compact live preview pinned inside the mobile form and becomes a balanced form/preview split on wider screens.
+Mobile is the primary canvas. The viewer is a single full-height reminder with no catalogue sections, accessory controls, or commercial footer. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
 
 ## Motion
 
-One authored moment owns the experience: tapping the llama creates a springy hop and a brief fan of stars. Scene drift is subtle and stops under reduced motion. Accessory changes use a short boop, never continuous animation.
+One authored moment owns the experience: tapping the film replays it with a springy hop and a brief fan of stars. All motion stops under reduced motion.
 
 ## Accessibility and resilience
 
-All interactive targets are at least 44px, focus rings are high contrast, live regions announce copy and dress-up state, and content is visible without animation. Text over scenes always has a dark contrast layer.
+All interactive targets are at least 44px, focus rings are high contrast, and content is visible without animation. Text over scenes always has a dark contrast layer.

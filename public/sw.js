@@ -1,4 +1,4 @@
-const CACHE = 'happy-llama-keepsake-v4';
+const CACHE = 'happy-llama-reminder-v5';
 const CORE = [
   '/',
   '/assets/brand/happy-llama-logo.png',
@@ -7,7 +7,6 @@ const CORE = [
   '/assets/hero/happy-llama-hero-mobile-poster.webp',
   '/assets/hero/happy-llama-hero-desktop-poster.webp',
   '/assets/llama/cream-cutout.webp',
-  '/assets/llama/brown-cutout.webp',
   '/assets/scenes/galway.webp',
   '/assets/scenes/cusco.webp',
   '/assets/scenes/machupicchu.webp',
@@ -15,13 +14,7 @@ const CORE = [
   '/assets/scenes/moher.webp',
   '/assets/scenes/causeway.webp',
   '/assets/scenes/dublin.webp',
-  '/assets/scenes/rainbow.webp',
-  '/assets/accessories/hat.svg',
-  '/assets/accessories/glasses.svg',
-  '/assets/accessories/scarf.svg',
-  '/assets/accessories/headphones.svg',
-  '/assets/accessories/pendant.svg',
-  '/assets/accessories/flowers.svg'
+  '/assets/scenes/rainbow.webp'
 ];
 
 self.addEventListener('install', (event) => {
