@@ -28,7 +28,7 @@ Mobile is the primary canvas. The viewer is a single full-height reminder with n
 
 ## Motion
 
-One authored moment owns the experience: tapping the film replays it with a springy hop and a brief fan of stars. All motion stops under reduced motion.
+One authored moment owns the experience: the hero remains still until the recipient taps it, then the llama takes three playful steps, pauses, and returns to its resting frame. A brief fan of stars acknowledges the tap. Nothing autoplays.
 
 ## Accessibility and resilience
 

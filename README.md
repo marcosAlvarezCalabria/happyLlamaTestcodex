@@ -33,7 +33,7 @@ The `dist/` folder can be dragged into Netlify Drop. There are no server functio
 
 ## Artwork
 
-- Hero video: responsive mobile and desktop MP4 files live in `public/assets/hero/`, with WebP posters used when motion is reduced.
+- Tap motion: `public/assets/hero/happy-llama-tap-walk.mp4` is the four-second Higgsfield walking animation; its matching WebP poster keeps the reminder still until the recipient taps.
 - Creator preview: `public/assets/llama/cream-cutout.webp` is a transparent background extraction derived from the supplied product image.
 - Scenes: the eight supplied photographs live in `public/assets/scenes/` as WebP files.
 - Logo: `public/assets/brand/happy-llama-logo.png` is the supplied company logo.

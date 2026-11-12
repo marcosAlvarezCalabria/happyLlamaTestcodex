@@ -1,35 +1,28 @@
 <section class="hero-stage scene-0" id="hero-stage" aria-labelledby="hero-title">
   <h1 class="sr-only" id="hero-title">Your Happy Llama reminder</h1>
 
-  <button class="hero-video-trigger" id="hero-video-trigger" type="button" aria-label="Replay the Happy Llama animation">
+  <button class="hero-video-trigger" id="hero-video-trigger" type="button" aria-label="Make the Happy Llama walk">
     <video
       class="hero-video"
       id="hero-video"
       muted
-      loop
       playsinline
       preload="metadata"
-      poster="/assets/hero/happy-llama-hero-mobile-poster.webp"
+      poster="/assets/hero/happy-llama-tap-walk-poster.webp"
       aria-hidden="true"
     >
       <source
-        src="/assets/hero/happy-llama-hero-mobile.mp4"
+        src="/assets/hero/happy-llama-tap-walk.mp4"
         type="video/mp4"
-        media="(max-width: 959px)"
-      />
-      <source
-        src="/assets/hero/happy-llama-hero-desktop.mp4"
-        type="video/mp4"
-        media="(min-width: 960px)"
       />
       <img
-        src="/assets/hero/happy-llama-hero-mobile-poster.webp"
-        alt="A Happy Llama reminder travelling from Peru to Galway"
-        width="720"
-        height="900"
+        src="/assets/hero/happy-llama-tap-walk-poster.webp"
+        alt="A Happy Llama ready to walk"
+        width="834"
+        height="1112"
       />
     </video>
-    <span class="sr-only">Replay the eight-second Happy Llama journey</span>
+    <span class="sr-only">Play the Happy Llama walking animation</span>
   </button>
 
   <div class="spark-field" aria-hidden="true">
@@ -42,28 +35,15 @@
   const trigger = document.querySelector<HTMLButtonElement>('#hero-video-trigger');
   const video = document.querySelector<HTMLVideoElement>('#hero-video');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const desktopVideo = window.matchMedia('(min-width: 960px)');
   let celebrationTimer = 0;
-  let isInView = true;
 
-  const setPoster = () => {
-    if (!video) return;
-    video.poster = desktopVideo.matches
-      ? '/assets/hero/happy-llama-hero-desktop-poster.webp'
-      : '/assets/hero/happy-llama-hero-mobile-poster.webp';
-  };
-
-  const syncPlayback = () => {
-    if (!video) return;
-    if (reducedMotion.matches || document.hidden || !isInView) {
-      video.pause();
-      return;
-    }
-    void video.play().catch(() => stage?.classList.add('video-needs-play'));
+  const resetWalk = () => {
+    stage?.classList.remove('is-walking');
+    trigger?.setAttribute('aria-label', 'Make the Happy Llama walk');
   };
 
   const celebrate = () => {
-    if (!stage) return;
+    if (!stage || reducedMotion.matches) return;
     window.clearTimeout(celebrationTimer);
     stage.classList.remove('is-celebrating', 'video-needs-play');
     requestAnimationFrame(() => stage.classList.add('is-celebrating'));
@@ -72,23 +52,22 @@
 
   trigger?.addEventListener('click', () => {
     celebrate();
-    if (!video || reducedMotion.matches) return;
+    if (!video) return;
     video.currentTime = 0;
-    void video.play();
+    stage?.classList.add('is-walking');
+    trigger.setAttribute('aria-label', 'Replay the Happy Llama walk');
+    void video.play().catch(() => {
+      resetWalk();
+      stage?.classList.add('video-needs-play');
+    });
   });
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      isInView = Boolean(entry?.isIntersecting);
-      syncPlayback();
-    },
-    { threshold: 0.15 },
-  );
+  video?.addEventListener('ended', () => {
+    video.currentTime = 0;
+    resetWalk();
+  });
 
-  if (stage) observer.observe(stage);
-  document.addEventListener('visibilitychange', syncPlayback);
-  reducedMotion.addEventListener('change', syncPlayback);
-  desktopVideo.addEventListener('change', setPoster);
-  setPoster();
-  syncPlayback();
+  video?.addEventListener('error', resetWalk);
+
+  video?.pause();
 </script>

@@ -1,11 +1,10 @@
-const CACHE = 'happy-llama-reminder-v5';
+const CACHE = 'happy-llama-reminder-v6';
 const CORE = [
   '/',
   '/assets/brand/happy-llama-logo.png',
   '/assets/brand/favicon.svg',
   '/assets/hero/llama.svg',
-  '/assets/hero/happy-llama-hero-mobile-poster.webp',
-  '/assets/hero/happy-llama-hero-desktop-poster.webp',
+  '/assets/hero/happy-llama-tap-walk-poster.webp',
   '/assets/llama/cream-cutout.webp',
   '/assets/scenes/galway.webp',
   '/assets/scenes/cusco.webp',

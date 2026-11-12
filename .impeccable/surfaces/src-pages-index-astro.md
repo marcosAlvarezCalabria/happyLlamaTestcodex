@@ -23,4 +23,4 @@ A vivid pocket-retablo reminder joins Peru and Galway. The signature moment is t
 
 ## Production assets
 
-The supplied scene photographs, transparent llama cutout, and responsive hero film are in use.
+The supplied scene photographs, transparent llama cutout, and Higgsfield tap-triggered walking film are in use.

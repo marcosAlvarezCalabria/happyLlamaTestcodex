@@ -13,7 +13,7 @@ web
 
 ## Product Purpose
 
-Create a personal, lightweight digital reminder that travels with a physical Happy Llama: one message, one Galway–Peru scene, and the short Happy Llama film. Success means the seller can create a valid link in moments and the recipient can feel the message immediately without navigating a website or installing an app.
+Create a personal, lightweight digital reminder that travels with a physical Happy Llama: one message, one Galway–Peru scene, and a short tap-triggered Happy Llama motion. Success means the seller can create a valid link in moments and the recipient can feel the message immediately without navigating a website or installing an app.
 
 ## Positioning
 
@@ -30,7 +30,7 @@ The seller writes a short message, optional sign-off, and chooses one of eight s
 - Message and one of eight supplied Ireland/Peru scenes travel in the URL.
 - Mobile-first, narrow-screen and low-end Android support; 44px minimum touch targets and reduced-motion support.
 - Viewer language is English. Creator language is Spanish.
-- Supplied Galway/Peru photography, the Happy Llama film, and a transparent cream llama cutout derived from the supplied photo are used as local assets.
+- Supplied Galway/Peru photography, a Higgsfield walking motion generated from the approved Happy Llama hero, and a transparent cream llama cutout derived from the supplied photo are used as local assets.
 
 ## Brand Commitments
 
