@@ -1,4 +1,4 @@
-const CACHE = 'happy-llama-reminder-v16';
+const CACHE = 'happy-llama-reminder-v17';
 const CORE = [
   '/',
   '/assets/brand/happy-llama-logo.png',
@@ -14,7 +14,10 @@ const CORE = [
   '/assets/scenes/moher.webp',
   '/assets/scenes/causeway.webp',
   '/assets/scenes/dublin.webp',
-  '/assets/scenes/rainbow.webp'
+  '/assets/scenes/rainbow.webp',
+  '/assets/story/andean-community.png',
+  '/assets/story/backstrap-weaver.png',
+  '/assets/story/weaving-together.png'
 ];
 
 self.addEventListener('install', (event) => {

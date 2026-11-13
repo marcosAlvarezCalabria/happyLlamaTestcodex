@@ -2,7 +2,7 @@
 
 ## Visual thesis
 
-The interface behaves like one personal, retablo-inspired reminder rather than a website. It opens directly into the chosen Galway–Peru photograph, the recipient's message, and the llama standing freely inside that scene.
+The interface behaves like a small collection of keepsake experiences rather than a website. A tactile first choice leads either to the personal retablo-inspired reminder or to a vertical visual story about Andean textile tradition.
 
 ## Colour system
 
@@ -25,6 +25,8 @@ The reminder is one full-height Higgsfield motion scene with no inner card or se
 ## Composition
 
 Mobile is the primary canvas. The viewer is one edge-to-edge motion background with no framed card, catalogue sections, accessory controls, commercial footer, or duplicate message below the hero. The recipient's message uses a reserved upper text zone that remains clear of the visible llama, including with long copy and short screens. For short message-and-signature pairs, the type becomes the dominant keepsake gesture and the llama scales down to yield the necessary space. The creator keeps a live preview pinned inside the mobile form; while the keyboard is active it folds into a compact message strip, then returns to the complete preview after typing.
+
+The story is a single vertical stage, using full-bleed supplied photography, short English captions, one progress line, and one pause control. A restrained final screen carries the origin line and replay action.
 
 ## Motion
 

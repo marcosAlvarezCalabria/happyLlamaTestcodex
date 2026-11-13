@@ -37,6 +37,38 @@ const scenes = [
       </p>
 
       <form class="keepsake-form" id="keepsake-form" novalidate>
+        <fieldset class="type-fieldset">
+          <legend data-i18n="typeLegend">¿Qué quieres grabar en la pegatina?</legend>
+          <div class="type-selector">
+            <label class="type-choice">
+              <input type="radio" name="sticker-type" value="reminder" checked />
+              <span class="type-choice-card">
+                <span class="type-icon" aria-hidden="true">♥</span>
+                <strong data-i18n="reminderType">Recuerdo</strong>
+                <small data-i18n="reminderTypeHelp">Un mensaje personal con el lugar que elijas.</small>
+              </span>
+            </label>
+            <label class="type-choice">
+              <input type="radio" name="sticker-type" value="story" />
+              <span class="type-choice-card">
+                <span class="type-icon type-icon-story" aria-hidden="true">✦</span>
+                <strong data-i18n="storyType">Cómo se hizo</strong>
+                <small data-i18n="storyTypeHelp">Una pequeña historia de los textiles andinos.</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="story-creator-preview" data-story-field hidden>
+          <div class="story-preview-image" aria-hidden="true"></div>
+          <div class="story-preview-copy">
+            <p data-i18n="storyPreviewKicker">Historia de la llama</p>
+            <h2 data-i18n="storyPreviewTitle">De los Andes a Galway</h2>
+            <span data-i18n="storyPreviewBody">Una historia visual sobre fibras, color y tejido.</span>
+          </div>
+        </div>
+
+        <div class="reminder-fields" data-reminder-field>
         <div class="mobile-live-preview" aria-label="Vista previa que se actualiza mientras editas" data-i18n-aria="livePreviewAria">
           <div class="mobile-preview-label"><i aria-hidden="true"></i><span data-i18n="previewWhileTyping">Vista previa mientras escribes</span></div>
           <div class="mobile-preview-card scene-0" data-live-preview>
@@ -88,24 +120,26 @@ const scenes = [
             }
           </div>
         </fieldset>
+        </div>
 
         <button class="primary-button" id="copy-link" type="submit" disabled>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M8.5 12.5 15 6a3 3 0 0 1 4.2 4.2l-8.5 8.5a5 5 0 0 1-7.1-7.1l8-8" />
           </svg>
-          <span data-i18n="copyButton">Copiar enlace para la pegatina</span>
+          <span data-copy-label>Copiar enlace para la pegatina</span>
         </button>
-        <p class="microcopy" data-i18n="microcopy">Graba este enlace en el colgante con NFC Tools.</p>
+        <p class="microcopy" data-mode-help>Graba este enlace en el colgante con NFC Tools.</p>
 
         <div class="link-result" id="link-result" hidden>
           <p id="copy-status" role="status"></p>
           <a id="generated-link" href="#" target="_blank" rel="noreferrer"></a>
-          <button class="text-button" id="open-preview" type="button" data-i18n="openPreview">Abrir la vista del regalo →</button>
+          <button class="text-button" id="open-preview" type="button" data-open-label>Abrir la vista del regalo →</button>
         </div>
       </form>
     </section>
 
     <aside class="preview-zone" aria-label="Vista previa del recordatorio" data-i18n-aria="desktopPreviewAria">
+      <div data-reminder-preview>
       <div class="preview-label"><i aria-hidden="true"></i><span data-i18n="livePreview">Vista previa en vivo</span></div>
       <div class="keepsake-card scene-0" data-live-preview>
         <div class="preview-scene" aria-hidden="true"></div>
@@ -120,6 +154,19 @@ const scenes = [
         <div class="card-stitch" aria-hidden="true"></div>
       </div>
       <p class="preview-tip" data-i18n="privacyTip">El mensaje viaja dentro del enlace. No guardamos ningún dato.</p>
+      </div>
+      <div class="story-side-preview" data-story-preview hidden>
+        <div class="preview-label"><i aria-hidden="true"></i><span data-i18n="storyPreviewLabel">Vista previa de la historia</span></div>
+        <div class="story-side-frame">
+          <img src="/assets/brand/happy-llama-logo.png" alt="Happy Llama" width="141" height="83" />
+          <div>
+            <p data-i18n="storySideKicker">De Perú a Irlanda</p>
+            <h2 data-i18n="storySideTitle">Where your llama comes from</h2>
+          </div>
+          <span data-i18n="storySideCaption">Tradición, color y manos que tejen.</span>
+        </div>
+        <p class="preview-tip" data-i18n="storyPrivacyTip">El mismo enlace sirve para todas las pegatinas de historia.</p>
+      </div>
     </aside>
   </div>
 
@@ -144,6 +191,14 @@ const scenes = [
   const openPreview = document.querySelector<HTMLButtonElement>('#open-preview');
   const error = document.querySelector<HTMLElement>('#message-error');
   const languageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-language]'));
+  const typeInputs = Array.from(document.querySelectorAll<HTMLInputElement>('[name="sticker-type"]'));
+  const reminderFields = Array.from(document.querySelectorAll<HTMLElement>('[data-reminder-field]'));
+  const storyFields = Array.from(document.querySelectorAll<HTMLElement>('[data-story-field]'));
+  const reminderPreviews = Array.from(document.querySelectorAll<HTMLElement>('[data-reminder-preview]'));
+  const storyPreviews = Array.from(document.querySelectorAll<HTMLElement>('[data-story-preview]'));
+  const copyLabel = document.querySelector<HTMLElement>('[data-copy-label]');
+  const modeHelp = document.querySelector<HTMLElement>('[data-mode-help]');
+  const openLabel = document.querySelector<HTMLElement>('[data-open-label]');
 
   type CreatorLanguage = 'es' | 'en';
 
@@ -153,6 +208,19 @@ const scenes = [
       kicker: 'De Galway, con cariño',
       title: 'Crea un recordatorio que viaja con su llama.',
       intro: 'Escribe unas palabras, elige el lugar y copia el enlace que grabarás en el colgante.',
+      typeLegend: '¿Qué quieres grabar en la pegatina?',
+      reminderType: 'Recuerdo',
+      reminderTypeHelp: 'Un mensaje personal con el lugar que elijas.',
+      storyType: 'Cómo se hizo',
+      storyTypeHelp: 'Una pequeña historia de los textiles andinos.',
+      storyPreviewKicker: 'Historia de la llama',
+      storyPreviewTitle: 'De los Andes a Galway',
+      storyPreviewBody: 'Una historia visual sobre fibras, color y tejido.',
+      storyPreviewLabel: 'Vista previa de la historia',
+      storySideKicker: 'De Perú a Irlanda',
+      storySideTitle: 'Where your llama comes from',
+      storySideCaption: 'Tradición, color y manos que tejen.',
+      storyPrivacyTip: 'El mismo enlace sirve para todas las pegatinas de historia.',
       livePreviewAria: 'Vista previa que se actualiza mientras editas',
       previewWhileTyping: 'Vista previa mientras escribes',
       messageLabel: 'Mensaje',
@@ -169,12 +237,32 @@ const scenes = [
       footerOrigin: 'Hecho en Perú · Terminado en Galway',
       copied: '✓ Enlace copiado. Ya puedes grabarlo en el NFC.',
       ready: 'Enlace listo. Mantén pulsado para copiarlo.',
+      copyReminderButton: 'Copiar enlace para la pegatina',
+      copyStoryButton: 'Copiar enlace de Cómo se hizo',
+      reminderMicrocopy: 'Graba este enlace en el colgante con NFC Tools.',
+      storyMicrocopy: 'Este mismo enlace sirve para todas las pegatinas de historia.',
+      openReminder: 'Abrir la vista del regalo →',
+      openStory: 'Abrir Cómo se hizo →',
+      storyCopied: '✓ Enlace de la historia copiado. Puedes usarlo en todas las pegatinas.',
     },
     en: {
       nfcLabel: 'NFC reminder',
       kicker: 'From Galway, with love',
       title: 'Create a reminder that travels with their llama.',
       intro: 'Write a few words, choose a place and copy the link you will save to the pendant.',
+      typeLegend: 'What would you like to save to the tag?',
+      reminderType: 'Reminder',
+      reminderTypeHelp: 'A personal message with a place you choose.',
+      storyType: 'How it was made',
+      storyTypeHelp: 'A short story about Andean textile traditions.',
+      storyPreviewKicker: 'The llama story',
+      storyPreviewTitle: 'From the Andes to Galway',
+      storyPreviewBody: 'A visual story about fibres, colour and weaving.',
+      storyPreviewLabel: 'Story preview',
+      storySideKicker: 'From Peru to Ireland',
+      storySideTitle: 'Where your llama comes from',
+      storySideCaption: 'Tradition, colour and hands that weave.',
+      storyPrivacyTip: 'The same link works for every story tag.',
       livePreviewAria: 'Preview that updates while you edit',
       previewWhileTyping: 'Preview while you type',
       messageLabel: 'Message',
@@ -191,10 +279,32 @@ const scenes = [
       footerOrigin: 'Made in Peru · Finished in Galway',
       copied: '✓ Link copied. You can now save it to the NFC tag.',
       ready: 'Link ready. Press and hold to copy it.',
+      copyReminderButton: 'Copy link for the NFC tag',
+      copyStoryButton: 'Copy the How it was made link',
+      reminderMicrocopy: 'Save this link to the pendant with NFC Tools.',
+      storyMicrocopy: 'The same link works for every story tag.',
+      openReminder: 'Open the gift view →',
+      openStory: 'Open How it was made →',
+      storyCopied: '✓ Story link copied. You can use it for every story tag.',
     },
   };
 
   let currentLanguage: CreatorLanguage = 'es';
+
+  const selectedType = () => typeInputs.find((input) => input.checked)?.value === 'story' ? 'story' : 'reminder';
+
+  const syncType = () => {
+    const isStory = selectedType() === 'story';
+    reminderFields.forEach((element) => element.hidden = isStory);
+    storyFields.forEach((element) => element.hidden = !isStory);
+    reminderPreviews.forEach((element) => element.hidden = isStory);
+    storyPreviews.forEach((element) => element.hidden = !isStory);
+    if (copyButton) copyButton.disabled = !isStory && !(message?.value.trim());
+    if (copyLabel) copyLabel.textContent = translations[currentLanguage][isStory ? 'copyStoryButton' : 'copyReminderButton'];
+    if (modeHelp) modeHelp.textContent = translations[currentLanguage][isStory ? 'storyMicrocopy' : 'reminderMicrocopy'];
+    if (openLabel) openLabel.textContent = translations[currentLanguage][isStory ? 'openStory' : 'openReminder'];
+    if (linkResult) linkResult.hidden = true;
+  };
 
   const applyLanguage = (language: CreatorLanguage) => {
     currentLanguage = language;
@@ -210,6 +320,7 @@ const scenes = [
     languageButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(button.dataset.language === language));
     });
+    syncType();
     try {
       localStorage.setItem('happy-llama-language', language);
     } catch {}
@@ -230,7 +341,7 @@ const scenes = [
     previewMessages.forEach((preview) => preview.textContent = text);
     previewSignatures.forEach((preview) => preview.textContent = signature);
     if (count) count.textContent = String(message?.value.length ?? 0);
-    if (copyButton) copyButton.disabled = !(message?.value.trim());
+    if (copyButton) copyButton.disabled = selectedType() !== 'story' && !(message?.value.trim());
     if (message?.value.trim() && error) error.hidden = true;
 
     livePreviews.forEach((preview) => {
@@ -264,6 +375,7 @@ const scenes = [
 
   form?.addEventListener('input', updatePreview);
   form?.addEventListener('change', updatePreview);
+  typeInputs.forEach((input) => input.addEventListener('change', syncType));
 
   const isTextField = (target: EventTarget | null) =>
     target instanceof HTMLTextAreaElement ||
@@ -281,21 +393,26 @@ const scenes = [
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    const isStory = selectedType() === 'story';
     const text = message?.value.trim() ?? '';
-    if (!text) {
+    if (!isStory && !text) {
       if (error) error.hidden = false;
       message?.focus();
       return;
     }
 
-    const url = new URL(window.location.href);
+    const url = isStory ? new URL('/', window.location.origin) : new URL(window.location.href);
     url.search = '';
     url.hash = '';
-    url.searchParams.set('id', makeId());
-    url.searchParams.set('t', text);
-    url.searchParams.set('b', String(selectedScene()));
-    const signature = from?.value.trim();
-    if (signature) url.searchParams.set('f', signature);
+    if (isStory) {
+      url.searchParams.set('v', 'story');
+    } else {
+      url.searchParams.set('id', makeId());
+      url.searchParams.set('t', text);
+      url.searchParams.set('b', String(selectedScene()));
+      const signature = from?.value.trim();
+      if (signature) url.searchParams.set('f', signature);
+    }
 
     if (linkResult && generatedLink && copyStatus && openPreview) {
       generatedLink.href = url.toString();
@@ -304,7 +421,9 @@ const scenes = [
       linkResult.hidden = false;
       try {
         const copied = await copyText(url.toString());
-        copyStatus.textContent = copied ? translations[currentLanguage].copied : translations[currentLanguage].ready;
+        copyStatus.textContent = copied
+          ? translations[currentLanguage][isStory ? 'storyCopied' : 'copied']
+          : translations[currentLanguage].ready;
       } catch {
         copyStatus.textContent = translations[currentLanguage].ready;
       }
@@ -323,4 +442,5 @@ const scenes = [
   } catch {}
   applyLanguage(savedLanguage);
   updatePreview();
+  syncType();
 </script>

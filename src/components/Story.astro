@@ -1,0 +1,162 @@
+---
+import BrandMark from './BrandMark.astro';
+
+const storyScenes = [
+  {
+    src: '/assets/story/andean-community.png',
+    alt: 'An Andean community gathered around a colourful woven cloth',
+    eyebrow: 'A living tradition',
+    text: 'Across the Andes, textiles have carried identity, history and symbolism through generations.',
+  },
+  {
+    src: '/assets/story/backstrap-weaver.png',
+    alt: 'A woman working at a traditional loom',
+    eyebrow: 'Made by hand',
+    text: 'Natural fibres are prepared, coloured and woven by hand with tools shaped by centuries of practice.',
+  },
+  {
+    src: '/assets/story/weaving-together.png',
+    alt: 'Three women weaving bright textiles outdoors',
+    eyebrow: 'Stories in colour',
+    text: 'Mountains, animals, rivers and stars become patterns — a visual language held inside the cloth.',
+  },
+];
+---
+
+<main class="story-shell" data-mode="story" lang="en">
+  <article class="story-stage" aria-labelledby="story-title">
+    <header class="story-header">
+      <BrandMark compact />
+      <span>How it was made</span>
+    </header>
+
+    <div class="story-slides" aria-live="polite">
+      {
+        storyScenes.map((scene, index) => (
+          <figure class:list={['story-slide', { 'is-active': index === 0 }]} data-story-slide>
+            <img src={scene.src} alt={scene.alt} />
+            <figcaption>
+              <span>{scene.eyebrow}</span>
+              <p>{scene.text}</p>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <div class="story-title-card">
+      <p>From Peru to Galway</p>
+      <h1 id="story-title">Where your llama comes from</h1>
+    </div>
+
+    <div class="story-controls" aria-label="Story controls">
+      <button class="story-pause" type="button" aria-label="Pause story" aria-pressed="false">
+        <span aria-hidden="true" data-control-icon>Ⅱ</span>
+      </button>
+      <div class="story-progress" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <i></i>
+      </div>
+    </div>
+
+    <div class="story-final" hidden>
+      <img src="/assets/brand/happy-llama-logo.png" alt="Happy Llama" width="141" height="83" />
+      <p>Made in Peru · Finished in Galway</p>
+      <button type="button" data-watch-again>Watch again</button>
+    </div>
+
+    <p class="sr-only">
+      Across the Andes, textiles have carried identity, history and symbolism through generations.
+      Natural fibres are prepared, coloured and woven by hand with tools shaped by centuries of practice.
+      Mountains, animals, rivers and stars become patterns: a visual language held inside the cloth.
+      Made in Peru. Finished in Galway.
+    </p>
+  </article>
+</main>
+
+<script>
+  const isStoryPage = new URLSearchParams(window.location.search).get('v') === 'story';
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('[data-story-slide]'));
+  const pauseButton = document.querySelector<HTMLButtonElement>('.story-pause');
+  const controlIcon = document.querySelector<HTMLElement>('[data-control-icon]');
+  const progress = document.querySelector<HTMLElement>('.story-progress');
+  const progressFill = document.querySelector<HTMLElement>('.story-progress i');
+  const finalCard = document.querySelector<HTMLElement>('.story-final');
+  const watchAgain = document.querySelector<HTMLButtonElement>('[data-watch-again]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const sceneDuration = 7000;
+  const totalDuration = sceneDuration * slides.length;
+  let startedAt = 0;
+  let elapsed = 0;
+  let animationFrame = 0;
+  let paused = false;
+  let finished = false;
+
+  const showSlide = (index: number) => {
+    slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === index));
+  };
+
+  const updateControl = () => {
+    if (!pauseButton || !controlIcon) return;
+    pauseButton.setAttribute('aria-pressed', String(paused));
+    pauseButton.setAttribute('aria-label', paused ? 'Play story' : 'Pause story');
+    controlIcon.textContent = paused ? '▶' : 'Ⅱ';
+  };
+
+  const render = (now: number) => {
+    if (paused || finished) return;
+    const current = Math.min(totalDuration, elapsed + now - startedAt);
+    const percentage = (current / totalDuration) * 100;
+    const slideIndex = Math.min(slides.length - 1, Math.floor(current / sceneDuration));
+    showSlide(slideIndex);
+    if (progressFill) progressFill.style.width = `${percentage}%`;
+    progress?.setAttribute('aria-valuenow', String(Math.round(percentage)));
+
+    if (current >= totalDuration) {
+      finished = true;
+      finalCard?.removeAttribute('hidden');
+      return;
+    }
+    animationFrame = window.requestAnimationFrame(render);
+  };
+
+  const play = () => {
+    if (finished) return;
+    paused = false;
+    startedAt = performance.now();
+    updateControl();
+    animationFrame = window.requestAnimationFrame(render);
+  };
+
+  const pause = () => {
+    if (paused || finished) return;
+    elapsed = Math.min(totalDuration, elapsed + performance.now() - startedAt);
+    paused = true;
+    window.cancelAnimationFrame(animationFrame);
+    updateControl();
+  };
+
+  const reset = () => {
+    window.cancelAnimationFrame(animationFrame);
+    elapsed = 0;
+    finished = false;
+    paused = reducedMotion.matches;
+    showSlide(0);
+    if (progressFill) progressFill.style.width = '0%';
+    progress?.setAttribute('aria-valuenow', '0');
+    if (finalCard) finalCard.hidden = true;
+    updateControl();
+    if (!paused) play();
+  };
+
+  pauseButton?.addEventListener('click', () => {
+    if (finished) return;
+    if (paused) play(); else pause();
+  });
+  watchAgain?.addEventListener('click', reset);
+
+  if (isStoryPage) {
+    document.documentElement.lang = 'en';
+    reset();
+  }
+</script>
